@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-top: 70px;
+    /* 헤더 높이 + 여백 */
+    padding-bottom: 50px;
+    /* 푸터 높이 + 여백 */
+    min-height: calc(100vh - 120px);
+    /* 최소 화면 높이에서 헤더/푸터 높이 제외 */
+}
