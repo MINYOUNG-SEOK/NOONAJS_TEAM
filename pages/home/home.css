@@ -1,0 +1,341 @@
+.main-banner {
+    position: relative;
+    max-width: 80%;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.main-banner__content {
+    position: absolute;
+    left: 10%;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.main-banner__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.main-banner__description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+.main-banner__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-banner__image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bestseller-section {
+    background-color: #fff;
+    padding: 60px 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+    margin-right: 30px;
+}
+
+.category-nav {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 5px 0;
+}
+
+.category-item {
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 3px 0;
+}
+
+.category-item.active {
+    color: #000;
+    font-weight: 600;
+    border-bottom: 2px solid #000;
+}
+
+.bestseller-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.featured-book-container {
+    flex: 0 0 45%;
+    display: flex;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-right: 20px;
+}
+
+.featured-book-image {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    max-height: 350px;
+    margin-right: 20px;
+}
+
+.featured-book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.featured-book-image:hover img {
+    transform: scale(1.05);
+}
+
+.featured-book-info {
+    flex: 1;
+    text-align: left;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.book-author {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.book-description {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.bestseller-slider-wrapper {
+    flex: 0 0 50%;
+    position: relative;
+    padding-bottom: 50px;
+    margin-left: 0;
+}
+
+.bestseller-slider {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.5s ease-in-out;
+    padding: 5px;
+    overflow-x: hidden;
+}
+
+.bestseller-slider__item {
+    flex: 0 0 150px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-right: 5px;
+}
+
+.bestseller-slider__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bestseller-slider__item img {
+    width: 100%;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 12px;
+}
+
+.slider-book-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.slider-book-author {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+}
+
+.slider-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.page-info {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.slider-button {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slider-button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) {
+    .bestseller-container {
+        flex-direction: column;
+    }
+
+    .featured-book-container {
+        margin-bottom: 50px;
+        width: 100%;
+        max-width: 600px;
+        margin-right: 0;
+    }
+
+    .bestseller-slider-wrapper {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .bestseller-slider__item {
+        flex: 0 0 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-title {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+
+    .category-nav {
+        width: 100%;
+    }
+
+    .featured-book-container {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .featured-book-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-height: 300px;
+    }
+}

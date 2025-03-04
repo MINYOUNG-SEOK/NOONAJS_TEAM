@@ -16,7 +16,188 @@
 <body>
     <!-- 메인 콘텐츠만 작성 (헤더와 푸터는 자동 추가됨) -->
     <main>
-        메인 페이지
+        <section class="main-banner">
+            <div class="main-banner__image fade-in">
+                <img id="bannerImage" src="./images/banner1.png" alt="배너 이미지">
+            </div>
+        </section>
+
+        <section class="bestseller-section">
+            <div class="section-header">
+                <h2 class="section-title">베스트셀러 도서</h2>
+                <div class="category-nav">
+                    <span class="category-item active">전체</span>
+                    <span class="category-item">소설</span>
+                    <span class="category-item">시/에세이</span>
+                    <span class="category-item">경제/경영</span>
+                    <span class="category-item">자기계발</span>
+                    <span class="category-item">인문</span>
+                    <span class="category-item">역사/문화</span>
+                </div>
+            </div>
+
+            <div class="bestseller-container">
+                <div class="featured-book-container">
+                    <div class="featured-book-image">
+                        <img id="featuredImage" src="./images/best1.jpg" alt="대표 책">
+                    </div>
+                    <div class="featured-book-info">
+                        <h3 id="featuredTitle" class="book-title">우리의 파란</h3>
+                        <div id="featuredAuthor" class="book-author">이지나 | 역자</div>
+                        <div class="book-tags">
+                            <span class="tag">#시</span>
+                            <span class="tag">#에세이</span>
+                            <span class="tag">#파란</span>
+                        </div>
+                        <p id="featuredDescription" class="book-description">
+                            언어를 사이에는 거리란 공간이 있어서, 때로 그 틈이
+                            점점 넓어질 수도 있다. 무언가를 표현하는 과정에서
+                            발생하는 공백과 간극에 대한 이야기...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 우측 슬라이더 영역 -->
+                <div class="bestseller-slider-wrapper">
+                    <div class="bestseller-slider" id="bestsellerSlider">
+                        <div class="bestseller-slider__item" data-index="0">
+                            <img src="./images/best2.jpg" alt="책2">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">우리의 파란</h3>
+                                <p class="slider-book-author">이지나</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    언어를 사이에는 거리란 공간이 있어서, 때로 그 틈이
+                                    점점 넓어질 수도 있다. 무언가를 표현하는 과정에서
+                                    발생하는 공백과 간극에 대한 이야기...
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="1">
+                            <img src="./images/best3.jpg" alt="책3">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">비로 만든 사람</h3>
+                                <p class="slider-book-author">김태희</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    비가 내리는 날, 창가에 앉아 생각하던 그날의 기억.
+                                    세상을 보는 새로운 시선과 감성이 녹아든 소설.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="2">
+                            <img src="./images/best4.jpg" alt="책4">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">어느 날 갑자기</h3>
+                                <p class="slider-book-author">박상민</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    일상의 변화가 가져오는 특별한 순간들. 어느 날 갑자기
+                                    찾아온 변화가 주인공의 인생을 바꾸게 되는 이야기.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="3">
+                            <img src="./images/best5.jpg" alt="책5">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">푸른 하늘 아래</h3>
+                                <p class="slider-book-author">정민수</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    푸른 하늘 아래 펼쳐지는 다양한 인생 이야기. 서로 다른
+                                    사람들의 삶이 교차하며 만들어내는 감동적인 서사.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best6.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best6.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best7.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best8.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best9.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="bestseller-slider__item" data-index="4">
+                            <img src="./images/best10.jpg" alt="책6">
+                            <div class="book-info">
+                                <h3 class="slider-book-title">별이 빛나는 밤</h3>
+                                <p class="slider-book-author">이하늘</p>
+                                <p class="slider-book-description" style="display: none;">
+                                    밤하늘의 별을 바라보며 꿈을 꾸는 주인공들의 이야기.
+                                    희망과 좌절, 그리고 다시 찾아오는 빛에 관한 에세이.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button class="slider-button prev" id="prevBtn">❮</button>
+                        <span class="page-info" id="pageInfo">1 / 5</span>
+                        <button class="slider-button next" id="nextBtn">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="new-release-books">
+            <h2 class="section-title">신작 도서</h2>
+            <div class="book-list">
+                <div class="book-item">책 1</div>
+                <div class="book-item">책 2</div>
+                <div class="book-item">책 3</div>
+            </div>
+        </section>
+
+        <section class="category-bestseller">
+            <h2 class="section-title">카테고리별 베스트셀러</h2>
+            <div class="category-list">
+                <div class="category-item">소설</div>
+                <div class="category-item">경제/경영</div>
+                <div class="category-item">자기계발</div>
+            </div>
+        </section>
     </main>
 </body>
 
