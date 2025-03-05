@@ -54,14 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // 추가 도서 데이터 (현재 슬라이더에 없는 책들)
   const additionalBooks = [
     {
-      image: "./images/best6.jpg", // .jpg로 수정
+      image: "./images/best6.jpg",
       title: "가을의 노래",
       author: "최서연",
       description:
         "계절의 변화와 함께 찾아오는 감성을 담은 시집. 가을의 정취를 섬세하게 표현한 작품들이 담겨있습니다.",
     },
     {
-      image: "./images/best7.jpg", // .jpg로 수정
+      image: "./images/best7.jpg",
       title: "미스터리 하우스",
       author: "강현우",
       description:
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 슬라이더 위치 업데이트
   function updateSlider() {
-    const itemWidth = sliderItems[0].offsetWidth + 20; // 아이템 너비 + 간격(gap)
+    const itemWidth = sliderItems[0].offsetWidth + 40; // 아이템 너비 + 간격(gap)
     slider.style.transform = `translateX(-${currentSlideIndex * itemWidth}px)`;
     updatePageInfo();
   }
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", function () {
     // 현재 표시 가능한 슬라이드 수 재계산
     const newVisibleSlidesCount = Math.floor(
-      (slider.parentElement.offsetWidth - 40) / (180 + 20)
+      (slider.parentElement.offsetWidth - 40) / (180 + 40)
     );
     const newMaxSlideIndex = totalSlides - newVisibleSlidesCount;
 
