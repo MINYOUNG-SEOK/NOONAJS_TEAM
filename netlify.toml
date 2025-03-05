@@ -1,0 +1,4 @@
+# netlify.toml
+[build]
+  publish = "./"    # 정적 파일 디렉토리
+
