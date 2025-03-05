@@ -181,14 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 이벤트 리스너 설정
     function setupEventListeners() {
-      // 슬라이더 아이템 클릭
-      sliderItems.forEach((item, index) => {
-        item.addEventListener("click", () => {
-          swapFeaturedBook(index);
-          resetAutoSlide();
-        });
-      });
-
       // 이전 버튼
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
