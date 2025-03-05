@@ -1,0 +1,86 @@
+/* F8F3D9 EBE5C2 B9B28A 504B38 */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.category-nav {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.category {
+  padding: 10px 12px;
+  margin: 5px;
+  border: none;
+  background: none;
+  color: rgb(60, 60, 60);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.category:hover {
+  background-color: #ffe8a9;
+}
+
+#category-container{
+  width: 80%;
+  border: 2px solid black;
+  margin: 0 auto;
+}
+
+
+
+
+#book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.book {
+  padding-top: 40px;
+  width: 220px;
+  /* border: 1px solid #ddd; */
+  
+}
+
+.book img {
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  min-height: 200px;
+  object-fit: contain;
+  display: block;
+  width: 170px;
+  height: auto;
+
+}
+
+
+#book-list .categories-title {
+  /* border: 1px solid #ddd; */
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px 20px 10px 25px;
+  color: #2d2d2d;
+}
+
+#book-list .categories-author{
+  font-size: 13px;
+  font-weight: 400; 
+  color: #767676;
+  padding-left: 25px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 1줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+

@@ -6,18 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지 제목</title>
     <!-- 페이지별 스타일 -->
-    <link rel="stylesheet" href="category.css">
+    <link rel="stylesheet" href="./category.css">
     <!-- 공통 스크립트는 단 한 번만 추가 -->
     <script src="/main.js"></script>
     <!-- 페이지별 스크립트 -->
-    <script defer src="category.js"></script>
+    <script src="./category.js"></script>
 </head>
 
 <body>
-    <!-- 메인 콘텐츠만 작성 (헤더와 푸터는 자동 추가됨) -->
-    <main>
-        카테고리별 페이지
-    </main>
+
+    <div class="category-nav">
+        <button class="category" data-category="문학">문학</button>
+        <button class="category" data-category="에세이">에세이</button>
+        <button class="category" data-category="자기계발">자기계발</button>
+        <button class="category" data-category="인문학">인문학</button>
+        <button class="category" data-category="사회과학">사회과학</button>
+        <button class="category" data-category="역사">역사</button>
+        <button class="category" data-category="가정/요리/뷰티">가정/요리/뷰티</button>
+        <button class="category" data-category="여행">여행</button>
+    </div>
+
+
+    <section id="book-list">
+        <!-- API 데이터가 여기에 표시됨 -->
+    </section>
+
+
 </body>
 
 </html>
