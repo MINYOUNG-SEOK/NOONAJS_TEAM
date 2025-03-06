@@ -1,5 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-const itemId = urlParams.get("itemId") || '359106312';
+const itemId = urlParams.get("itemId") || '356320035';
 let bookData = {
     "title": "이별할 땐 문어",
     "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=359106312&amp;partner=openAPI&amp;start=api",
@@ -55,7 +55,9 @@ async function getBookDetail() {
         bookData = data.item[0];
 
         if(bookData) {
-            // renderBookDetail();
+            renderBookTitleAndCover();
+            renderBookSummary();
+            renderBasicInfos();
         } else {
             //renderError();
         }
@@ -65,4 +67,77 @@ async function getBookDetail() {
     }
 }
 
-// getBookDetail();
+// 제목 정보 및 이미지 출력
+const renderBookTitleAndCover = () => {
+    // 제목
+    document.querySelector('.detail_book-title').textContent = bookData.title;
+
+    // 부제목
+    if(bookData.subInfo.subTitle) {
+        document.querySelector('.detail_sub-title').textContent = bookData.subInfo.subTitle;
+    }
+
+    // 이미지
+    document.getElementById('detail_bookCover').src = bookData.cover.replace('coversum', 'cover500');
+    document.getElementById('detail_bookCover').alt = bookData.title;
+    document.querySelector('.detail_m_bg').style.backgroundImage = `url("${bookData.cover.replace('coversum', 'cover500')}")`;
+}
+
+// 요약 정보
+const renderBookSummary = () => {
+    console.log('render Book Detail : ', bookData);
+    
+    let summaryHTML = ``;
+    // 원서명
+    if(bookData.subInfo.originalTitle) {
+        summaryHTML += `<li>
+                            <strong class="detail_bi-title">원서명</strong>
+                            <span>${bookData.subInfo.originalTitle}</span>
+                        </li>`;
+    }
+    // 작가 - 지은이
+    summaryHTML += `<li>
+                        <strong class="detail_bi-title">저자</strong>
+                        <span>${bookData.author}</span>
+                    </li>`;
+    // 출판사
+    summaryHTML += `<li>
+                        <strong class="detail_bi-title">출판사</strong>
+                        <span>${bookData.publisher}</span>
+                    </li>`;
+    // 발행일
+    summaryHTML += `<li>
+                        <strong class="detail_bi-title">발행일</strong>
+                        <span>${bookData.pubDate}</span>
+                    </li>`;
+
+    document.querySelector('.detail_summary').innerHTML = summaryHTML;
+};
+
+// 그 외 기본 정보 출력
+const renderBasicInfos = () => {
+    // isbn
+    let isbn = (bookData.isbn13) ? bookData.isbn13 : bookData.isbn;
+    if(bookData.isbn13) {
+        // 979-11-911-1477-5
+        isbn = `${isbn.substring(0,3)}-${isbn.substring(3,5)}-${isbn.substring(5,8)}`
+             + `-${isbn.substring(8,12)}-${isbn.substring(12)}`;
+    } else {
+        // 0-545-01022-5
+        isbn = `${isbn.substring(0,1)}-${isbn.substring(1,4)}-${isbn.substring(4,9)}-${isbn.substring(9)}`;
+    }
+    document.getElementById('detail_isbn').textContent = isbn;
+
+    // category
+    document.getElementById('detail_category').textContent = bookData.categoryName;
+    // 정가
+    document.getElementById('detail_price').textContent = bookData.priceStandard;
+    // 구매링크
+    document.querySelector('.detail_buy-link a').href= bookData.link;
+
+    // 도서소개
+    document.getElementById('detail_description').textContent = bookData.description;
+}
+
+
+getBookDetail();
