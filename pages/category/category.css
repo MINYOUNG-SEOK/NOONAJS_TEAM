@@ -9,6 +9,7 @@
 .category-nav {
   margin-top: 50px;
   text-align: center;
+
 }
 
 .category {
@@ -39,7 +40,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  width: 100%;
+  width: 87%;
   margin: 0 auto;
 }
 
@@ -77,10 +78,24 @@
   padding-left: 25px;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 최대 1줄 */
+  -webkit-line-clamp: 2; /* 최대 2줄 */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-wrap: break-word;
 }
 
+
+
+/* 페이지네이션 아래 */
+#category-page-box{
+padding: 50px 0;
+border: 1px solid blue;
+text-align: center;
+}
+
+#pageNumbers{
+  font-size: 17px;
+  color: #767676;
+  padding: 0 12px;
+}
