@@ -6,18 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지 제목</title>
     <!-- 페이지별 스타일 -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="detail.css">
-    <!-- 공통 스크립트는 단 한 번만 추가 -->
-    <script src="/main.js"></script>
-    <!-- 페이지별 스크립트 -->
-    <script defer src="detail.js"></script>
 </head>
 
 <body>
     <!-- 메인 콘텐츠만 작성 (헤더와 푸터는 자동 추가됨) -->
     <main>
-        디테일 페이지
+        <div class="container detail_container">
+            <section class="detail_contents">
+                <div class="detail_book-detail">
+                    <div class="detail_button-area">
+                        <button type="button" class="detail_button-link">
+                            <span class="detail_blind">링크 복사하기</span>
+                        </button>
+                        <button type="button" class="detail_button-like">
+                            <span class="detail_blind">찜하기</span>
+                        </button>
+                    </div>
+                    <div class="detail_thumb">
+                        <div class="detail_m_bg"></div>
+                        <img id="detail_bookCover" 
+                            src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png?20210521171500"
+                            alt="image not found">
+                    </div>
+                    <div class="detail_book-info">
+                        <h2 class="detail_book-title"></h2>
+                        <p class="detail_sub-title"></p>
+                        <ul class="detail_summary"></ul>
+                        <ul class="detail_basic-info">
+                            <li>
+                                <ul>
+                                    <li>
+                                        <strong class="detail_bi-title">ISBN</strong>
+                                        <span id="detail_isbn"></span>
+                                    </li>
+                                    <li>
+                                        <strong class="detail_bi-title">분야</strong>
+                                        <span id="detail_category"></span>
+                                    </li>
+                                    <li>
+                                        <strong class="detail_bi-title">별점</strong>
+                                        <span></span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong class="detail_bi-title">정가</strong>
+                                <div>
+                                    <div class="detail_price">
+                                        <b id="detail_price"></b>
+                                        원
+                                    </div>
+                                    <div class="detail_buy-link">
+                                        <a href="" target="_blank">
+                                            <img src="http://image.aladin.co.kr/img/header/2011/aladin_logo_new.gif" alt="알라딘 구매 링크">
+                                            <span>구매링크</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="detail_description-section">
+                <div class="detail_contents">
+                    <h3 class="detail_desc-title">도서소개</h3>
+                    <div id="detail_description">
+
+                    </div>
+                </div>
+                
+            </section>
+        </div>
     </main>
+
+    <!-- 공통 스크립트는 단 한 번만 추가 -->
+    <script src="/main.js"></script>
+    <!-- 페이지별 스크립트 -->
+    <script defer type="module" src="detail.js"></script>
 </body>
 
 </html>
