@@ -41,7 +41,7 @@
     .detail_book-detail {
         display: flex;
         align-items: flex-start;
-        padding-bottom: 116px;
+        padding-bottom: 80px;
     }
 
     .detail_button-area {
@@ -100,6 +100,7 @@
 
     .detail_thumb img {
         width: 100%;
+        max-width: 100%;
     }
 
     .detail_book-title {
@@ -194,7 +195,22 @@
     }
 
     /* 책 디테일 섹션 */
-    
+    .detail_description-section {
+        padding: 0 50px 80px;
+    }
+
+    .detail_desc-title {
+        font-size: 24px;
+        margin-bottom: 1.25rem;
+        line-height: 1;
+    }
+
+    .detail_description {
+        word-break: break-all;
+        line-height: 180%;
+        font-weight: 400;
+        color: #333;
+    }
     
 }
 
