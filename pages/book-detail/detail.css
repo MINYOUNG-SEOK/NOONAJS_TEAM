@@ -167,6 +167,32 @@
         width: calc(100% - 132px);
     }
 
+    .detail_rating {
+        column-gap: .75rem;
+    }
+
+    .detail_rating-stars i {
+        font-size: 1.1rem;
+        margin-right: 2px;
+    }
+
+    .fa-star, .fa-star-half-o {
+        color : #ffd700;
+    }
+
+    .fa-star-o {
+        color: #e0e0e0;
+    }
+
+    .detail_rating-text {
+        font-weight: 600;
+    }
+
+    .detail_rating-count {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
     .detail_price {
         font-size: 18px;
         font-weight: 500;

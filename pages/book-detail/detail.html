@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>페이지 제목</title>
     <!-- 페이지별 스타일 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="detail.css">
 </head>
 
@@ -50,7 +51,19 @@
                                     </li>
                                     <li>
                                         <strong class="detail_bi-title">별점</strong>
-                                        <span></span>
+                                        <div class="detail_rating">
+                                            <div class="detail_rating-grade">
+                                                <span class="detail_rating-stars" id="detail_rating-stars">
+                                                    <i class="fa fa-solid fa-star-o"></i>
+                                                    <i class="fa fa-solid fa-star-o"></i>
+                                                    <i class="fa fa-solid fa-star-o"></i>
+                                                    <i class="fa fa-solid fa-star-o"></i>
+                                                    <i class="fa fa-solid fa-star-o"></i>
+                                                </span>
+                                                <em class="detail_rating-text">0</em>
+                                            </div>
+                                            <span class="detail_rating-count" id="detail_rating-count">(0건)</span>
+                                        </div>
                                     </li>
                                 </ul>
                             </li>

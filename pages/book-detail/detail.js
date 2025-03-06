@@ -58,6 +58,7 @@ async function getBookDetail() {
             renderBookTitleAndCover();
             renderBookSummary();
             renderBasicInfos();
+            renderRating();
         } else {
             //renderError();
         }
@@ -131,12 +132,47 @@ const renderBasicInfos = () => {
     // category
     document.getElementById('detail_category').textContent = bookData.categoryName;
     // 정가
-    document.getElementById('detail_price').textContent = bookData.priceStandard;
+    document.getElementById('detail_price').textContent = bookData.priceStandard.toLocaleString('ko-KR');
     // 구매링크
     document.querySelector('.detail_buy-link a').href= bookData.link;
 
     // 도서소개
     document.getElementById('detail_description').textContent = bookData.description;
+}
+
+const renderRating = () => {
+    const ratingInfo = bookData.subInfo.ratingInfo;
+
+    let starsHTML = ``;
+    if(ratingInfo) {
+        const score = ratingInfo.ratingScore;
+        // 별 하나당 2점
+        
+        // 꽉 찬 별 개수
+        const fullStars = Math.floor(score / 2);
+        // 반 별 여부 계산
+        const hasHalfStar = fullStars * 2 < score;
+        // 빈 별 개수
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+        // 꽉 찬 별 추가
+        for(let i = 0; i < fullStars; i++) {
+            starsHTML += '<i class="fa fa-solid fa-star"></i>';
+        }
+        // 반 별 추가
+        if(hasHalfStar) {
+            starsHTML += '<i class="fa fa-solid fa-star-half-o"></i>';
+        }
+        // 빈 별 추가
+        for(let i = 0; i < emptyStars; i++) {
+            starsHTML += '<i class="fa fa-solid fa-star-o"></i>';
+        }
+
+        document.getElementById('detail_rating-stars').innerHTML = starsHTML;
+        document.querySelector('.detail_rating-text').textContent = ratingInfo.ratingScore;
+        document.getElementById('detail_rating-count').textContent = `(${ratingInfo.ratingCount}건)`;
+    }
+
 }
 
 
