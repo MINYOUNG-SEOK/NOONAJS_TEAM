@@ -24,7 +24,114 @@
 
   <body>
     <!-- 메인 콘텐츠만 작성 (헤더와 푸터는 자동 추가됨) -->
-    <main>메인 페이지</main>
+
+    <main>
+        <section class="home-banner">
+            <div class="home-banner__image home-fade-in">
+                <img id="bannerImage" src="./images/banner1.png" alt="배너 이미지">
+            </div>
+        </section>
+
+        <section class="home-bestseller-section">
+            <div class="home-section-header">
+                <h2 class="home-section-title">베스트셀러 도서</h2>
+                <div class="home-category-nav">
+                </div>
+            </div>
+
+            <div class="home-bestseller-container">
+                <div class="home-featured-book-container">
+                    <div class="home-featured-book-image">
+                        <img id="featuredImage" src="./images/best1.jpg" alt="대표 책">
+                    </div>
+                    <div class="home-featured-book-info">
+                        <h3 id="featuredTitle" class="home-book-title">우리의 파란</h3>
+                        <div id="featuredAuthor" class="home-book-author">이지나 | 역자</div>
+                        <div class="home-book-tags">
+                            <span class="home-tag">#시</span>
+                            <span class="home-tag">#에세이</span>
+                            <span class="home-tag">#파란</span>
+                        </div>
+                        <p id="featuredDescription" class="home-book-description">
+                            언어를 사이에는 거리란 공간이 있어서, 때로 그 틈이
+                            점점 넓어질 수도 있다. 무언가를 표현하는 과정에서
+                            발생하는 공백과 간극에 대한 이야기...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 우측 슬라이더 영역 -->
+                <div class="home-bestseller-slider-wrapper">
+                    <div class="home-bestseller-slider" id="bestsellerSlider">
+                        <div class="home-bestseller-slider__item">
+                            <!--  -->
+                        </div>
+                    </div>
+                    <div class="home-slider-controls">
+                        <button class="home-slider-button prev" id="prevBtn">❮</button>
+                        <span class="home-page-info" id="pageInfo">
+                            <!--  -->
+                        </span>
+                        <button class="home-slider-button next" id="nextBtn">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-new-release-books">
+            <div class="home-section-header">
+                <h2 class="home-section-title">신작 도서</h2>
+            </div>
+            <div class="home-bestseller-container">
+                <div class="home-bestseller-slider-wrapper">
+                    <div class="home-bestseller-slider" id="newReleaseSlider">
+                        <div class="home-bestseller-slider__item">
+                            <img src="./images/best1.jpg" alt="신작1">
+                            <!--  -->
+                        </div>
+                    </div>
+                    <div class="home-slider-controls">
+                        <button class="home-slider-button prev" id="newPrevBtn">❮</button>
+                        <span class="home-page-info" id="newPageInfo">
+                            <!--  -->
+                        </span>
+                        <button class="home-slider-button next" id="newNextBtn">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-category-bestseller">
+            <div class="home-section-header">
+                <h2 class="home-section-title">카테고리별 베스트셀러</h2>
+                <div class="home-category-nav">
+                    <span class="home-category-item active">문학</span>
+                    <span class="home-category-item">에세이</span>
+                    <span class="home-category-item">자기계발</span>
+                    <span class="home-category-item">교양</span>
+                    <span class="home-category-item">라이프스타일</span>
+                </div>
+            </div>
+            <div class="home-bestseller-container">
+                <div class="home-bestseller-slider-wrapper">
+                    <div class="home-bestseller-slider" id="categorySlider">
+                        <div class="home-bestseller-slider__item">
+                            <!--  -->
+                        </div>
+                    </div>
+                    <div class="home-slider-controls">
+                        <button class="home-slider-button prev" id="catPrevBtn">❮</button>
+                        <span class="home-page-info" id="catPageInfo">
+                            <!--  -->
+                        </span>
+                        <button class="home-slider-button next" id="catNextBtn">❯</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="/components/header/header.js"></script>
-  </body>
+</body>
+
 </html>
+
