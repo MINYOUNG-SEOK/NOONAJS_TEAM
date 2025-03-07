@@ -1,9 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const API_KEY = "ttbchuo_o1910001 ";
+  let page = 1;
+  const pageSize = 50;
+  let totalResults = 0;
+
+  const categoryMap = {
+    전체: 0,
+    문학: 1,
+    에세이: 55,
+    자기계발: 336, // 자기계발
+    교양: 119, // 인문학을 교양의 대표 카테고리로 설정
+    라이프스타일: 1230, // 가정/요리/뷰티를 라이프스타일의 대표 카테고리로 설정
+  };
+
   // 메인 배너 이미지 순환
   initBannerRotation();
 
-  // 모든 슬라이더 초기화
-  initSliders();
+  // 페이지 로드 시 데이터 불러오기
+  fetchBestsellers();
+  fetchNewReleases();
+  fetchCategoryBestsellers(0); // 기본 카테고리: 전체
+
+  // 카테고리 탭 클릭 이벤트 설정
+  const categoryTabs = document.querySelectorAll(
+    ".home-category-bestseller .home-category-item"
+  );
+  categoryTabs.forEach((tab) => {
+    tab.addEventListener("click", function () {
+      categoryTabs.forEach((t) => t.classList.remove("active"));
+      this.classList.add("active");
+
+      const categoryId = this.getAttribute("data-category-id") || 0;
+      fetchCategoryBestsellers(categoryId);
+    });
+  });
 
   // 배너 이미지 순환 기능
   function initBannerRotation() {
@@ -12,6 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
       "./images/banner2.png",
       "./images/banner3.png",
       "./images/banner4.png",
+      "./images/banner5.png",
+      "./images/banner6.png",
+      "./images/banner7.png",
+      "./images/banner8.png",
+      "./images/banner9.png",
+      "./images/banner10.png",
     ];
     let currentIndex = 0;
     const imageElement = document.getElementById("bannerImage");
@@ -30,62 +66,282 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(changeImage, 4000);
   }
 
-  // 모든 슬라이더 초기화
-  function initSliders() {
-    // 베스트셀러 슬라이더 (특별한 메인 책 디스플레이 포함)
-    initFeaturedSlider(
-      "bestsellerSlider",
-      "prevBtn",
-      "nextBtn",
-      "pageInfo",
-      {
-        featuredImage: "featuredImage",
-        featuredTitle: "featuredTitle",
-        featuredAuthor: "featuredAuthor",
-        featuredDescription: "featuredDescription",
-      },
-      3000
-    );
+  // 베스트셀러 데이터 가져오기
+  async function fetchBestsellers() {
+    try {
+      const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
+      url.searchParams.set("ttbkey", API_KEY);
+      url.searchParams.set("QueryType", "Bestseller");
+      url.searchParams.set("MaxResults", pageSize);
+      url.searchParams.set("start", page);
+      url.searchParams.set("SearchTarget", "Book");
+      url.searchParams.set("output", "js");
+      url.searchParams.set("Version", "20131101");
+      url.searchParams.set("Cover", "Big");
 
-    // 신작 도서 슬라이더 (무한 슬라이드, 왼쪽→오른쪽)
-    initInfiniteSlider(
-      "newReleaseSlider",
-      "newPrevBtn",
-      "newNextBtn",
-      "newPageInfo",
-      3000,
-      "next" // 기본 방향: 왼쪽→오른쪽
-    );
+      const data = await fetchAladinAPI(url);
 
-    // 카테고리별 베스트셀러 슬라이더 (무한 슬라이드, 오른쪽→왼쪽)
-    initInfiniteSlider(
-      "categorySlider",
-      "catPrevBtn",
-      "catNextBtn",
-      "catPageInfo",
-      3000,
-      "prev", // 기본 방향: 오른쪽→왼쪽
-      true // 버튼 방향 반전
-    );
+      if (data) {
+        displayBestsellerBooks(data.item);
+        totalResults = data.totalResults;
 
-    // 카테고리 탭 기능 초기화
-    initCategoryTabs();
+        // 베스트셀러 슬라이더 초기화
+        initFeaturedSlider(
+          "bestsellerSlider",
+          "prevBtn",
+          "nextBtn",
+          "pageInfo",
+          {
+            featuredImage: "featuredImage",
+            featuredTitle: "featuredTitle",
+            featuredAuthor: "featuredAuthor",
+            featuredDescription: "featuredDescription",
+          },
+          3000
+        );
+      }
+    } catch (error) {
+      console.error("베스트셀러 데이터를 가져오는 중 오류 발생:", error);
+      errorRender("베스트셀러", error.message);
+    }
   }
 
-  // 카테고리 탭 기능
-  function initCategoryTabs() {
-    const categoryTabs = document.querySelectorAll(
-      ".home-category-bestseller .home-category-item"
-    );
+  // 신작 도서 데이터 가져오기
+  async function fetchNewReleases() {
+    try {
+      const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
+      url.searchParams.set("ttbkey", API_KEY);
+      url.searchParams.set("QueryType", "ItemNewAll");
+      url.searchParams.set("MaxResults", pageSize);
+      url.searchParams.set("start", page);
+      url.searchParams.set("SearchTarget", "Book");
+      url.searchParams.set("output", "js");
+      url.searchParams.set("Version", "20131101");
+      url.searchParams.set("Cover", "Big");
 
-    categoryTabs.forEach((tab) => {
-      tab.addEventListener("click", function (e) {
-        categoryTabs.forEach((t) => t.classList.remove("active"));
-        this.classList.add("active");
+      const data = await fetchAladinAPI(url);
 
-        // 여기에 카테고리에 따른 슬라이더 내용 업데이트 코드를 추가할 수 있습니다
-      });
+      if (data) {
+        displayNewReleaseBooks(data.item);
+
+        // 신작 도서 슬라이더 초기화
+        initInfiniteSlider(
+          "newReleaseSlider",
+          "newPrevBtn",
+          "newNextBtn",
+          "newPageInfo",
+          3000,
+          "next"
+        );
+      }
+    } catch (error) {
+      console.error("신작 도서 데이터를 가져오는 중 오류 발생:", error);
+      errorRender("신작 도서", error.message);
+    }
+  }
+
+  // 전역 변수로 슬라이더 관련 정보 추적
+  let categorySliderInterval = null;
+
+  // 카테고리별 베스트셀러 데이터 가져오기
+  async function fetchCategoryBestsellers(categoryId) {
+    try {
+      const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
+      url.searchParams.set("ttbkey", API_KEY);
+      url.searchParams.set("QueryType", "Bestseller");
+      url.searchParams.set("MaxResults", pageSize);
+      url.searchParams.set("start", page);
+      url.searchParams.set("SearchTarget", "Book");
+      url.searchParams.set("CategoryId", categoryId);
+      url.searchParams.set("output", "js");
+      url.searchParams.set("Version", "20131101");
+      url.searchParams.set("Cover", "Big");
+
+      const data = await fetchAladinAPI(url);
+
+      if (data) {
+        displayCategoryBooks(data.item);
+
+        // 카테고리별 베스트셀러 슬라이더 초기화
+        initInfiniteSlider(
+          "categorySlider",
+          "catPrevBtn",
+          "catNextBtn",
+          "catPageInfo",
+          3000,
+          "next",
+          true
+        );
+      }
+    } catch (error) {
+      console.error(
+        "카테고리별 베스트셀러 데이터를 가져오는 중 오류 발생:",
+        error
+      );
+      errorRender("카테고리별 베스트셀러", error.message);
+    }
+  }
+
+  // 알라딘 API 호출 (JSONP 방식으로 CORS 우회)
+  function fetchAladinAPI(url) {
+    return new Promise((resolve, reject) => {
+      const callbackName =
+        "aladin_callback_" + Math.round(Math.random() * 1000000);
+
+      window[callbackName] = function (data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        if (data.errorCode) {
+          reject(
+            new Error(data.errorMessage || "API 호출 중 오류가 발생했습니다.")
+          );
+        } else {
+          resolve(data);
+        }
+      };
+
+      const script = document.createElement("script");
+      script.src = url.toString() + `&callback=${callbackName}`;
+      script.onerror = () =>
+        reject(new Error("API 호출 중 네트워크 오류가 발생했습니다."));
+      document.body.appendChild(script);
     });
+  }
+
+  // 베스트셀러 도서 표시
+  function displayBestsellerBooks(books) {
+    if (!books || books.length === 0) {
+      errorRender("베스트셀러", "검색 결과가 없습니다.");
+      return;
+    }
+
+    const slider = document.getElementById("bestsellerSlider");
+    if (!slider) return;
+
+    // 기존 내용 초기화
+    slider.innerHTML = "";
+
+    // 각 책 항목 생성하여 슬라이더에 추가
+    books.forEach((book, index) => {
+      const bookItem = document.createElement("div");
+      bookItem.className = "home-bestseller-slider__item";
+      bookItem.setAttribute("data-index", index);
+
+      bookItem.innerHTML = `
+        <img src="${book.cover}" alt="${book.title}">
+        <div class="home-book-info">
+          <h3 class="home-slider-book-title">${book.title}</h3>
+          <p class="home-slider-book-author">${book.author}</p>
+          <p class="home-slider-book-description" style="display: none;">
+            ${book.description || "내용 없음"}
+          </p>
+        </div>
+      `;
+
+      slider.appendChild(bookItem);
+    });
+
+    // 첫 번째 책을 대표 책으로 설정
+    if (books.length > 0) {
+      const featuredBook = books[0];
+      const featuredImage = document.getElementById("featuredImage");
+      const featuredTitle = document.getElementById("featuredTitle");
+      const featuredAuthor = document.getElementById("featuredAuthor");
+      const featuredDescription = document.getElementById(
+        "featuredDescription"
+      );
+
+      if (featuredImage) featuredImage.src = featuredBook.cover;
+      if (featuredTitle) featuredTitle.textContent = featuredBook.title;
+      if (featuredAuthor)
+        featuredAuthor.textContent = `${featuredBook.author} | 역자`;
+      if (featuredDescription)
+        featuredDescription.textContent =
+          featuredBook.description || "내용 없음";
+    }
+  }
+
+  // 신작 도서 표시
+  function displayNewReleaseBooks(books) {
+    if (!books || books.length === 0) {
+      errorRender("신작 도서", "검색 결과가 없습니다.");
+      return;
+    }
+
+    const slider = document.getElementById("newReleaseSlider");
+    if (!slider) return;
+
+    // 기존 내용 초기화
+    slider.innerHTML = "";
+
+    // 각 책 항목 생성하여 슬라이더에 추가
+    books.forEach((book, index) => {
+      const bookItem = document.createElement("div");
+      bookItem.className = "home-bestseller-slider__item";
+      bookItem.setAttribute("data-index", index);
+
+      bookItem.innerHTML = `
+        <img src="${book.cover}" alt="${book.title}">
+        <div class="home-book-info">
+          <h3 class="home-slider-book-title">${book.title}</h3>
+          <p class="home-slider-book-author">${book.author}</p>
+        </div>
+      `;
+
+      slider.appendChild(bookItem);
+    });
+  }
+
+  // 카테고리별 베스트셀러 표시
+  function displayCategoryBooks(books) {
+    if (!books || books.length === 0) {
+      errorRender("카테고리별 베스트셀러", "검색 결과가 없습니다.");
+      return;
+    }
+
+    const slider = document.getElementById("categorySlider");
+    if (!slider) return;
+
+    // 기존 내용 초기화
+    slider.innerHTML = "";
+
+    // 각 책 항목 생성하여 슬라이더에 추가
+    books.forEach((book, index) => {
+      const bookItem = document.createElement("div");
+      bookItem.className = "home-bestseller-slider__item";
+      bookItem.setAttribute("data-index", index);
+
+      bookItem.innerHTML = `
+        <img src="${book.cover}" alt="${book.title}">
+        <div class="home-book-info">
+          <h3 class="home-slider-book-title">${book.title}</h3>
+          <p class="home-slider-book-author">${book.author}</p>
+        </div>
+      `;
+
+      slider.appendChild(bookItem);
+    });
+  }
+
+  // 오류 메시지 표시
+  function errorRender(section, errorMessage) {
+    const errorHTML = `
+      <div class="error-message">
+        <p>${errorMessage}</p>
+      </div>
+    `;
+
+    const sliderId =
+      section === "베스트셀러"
+        ? "bestsellerSlider"
+        : section === "신작 도서"
+        ? "newReleaseSlider"
+        : "categorySlider";
+
+    const slider = document.getElementById(sliderId);
+    if (slider) {
+      slider.innerHTML = errorHTML;
+    }
   }
 
   // 메인 책 디스플레이 포함한 슬라이더 초기화
