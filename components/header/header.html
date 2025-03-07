@@ -1,7 +1,79 @@
-<header class="fixed-header">
-    <h1><a href="/pages/home/home.html">도서 사이트</a></h1>
-    <nav>
-        <a href="/pages/home/home.html">홈</a>
-        <a href="/pages/favorites/favorites.html">즐겨찾기</a>
-    </nav>
+<header>
+  <nav class="navbar">
+    <!-- 로고 타이틀 -->
+    <a href="/pages/home/home.html" class="logo-title">
+      <img src="/assets/Preview.png" />
+    </a>
+    <!-- 카테고리 메뉴 버튼 -->
+    <div class="header_menus">
+      <div class="header_menu-item">
+        <button>문학</button>
+        <div class="header_dropdown-menu">
+          <button>소설</button>
+          <button>시</button>
+          <button>희곡</button>
+        </div>
+      </div>
+      <button>에세이</button>
+      <button>자기계발</button>
+      <div class="header_menu-item">
+        <button>교양</button>
+        <div class="header_dropdown-menu">
+          <button>인문학</button>
+          <button>사회과학</button>
+          <button>역사</button>
+        </div>
+      </div>
+      <div class="header_menu-item">
+        <button>라이프 스타일</button>
+        <div class="header_dropdown-menu">
+          <button>요림/살림</button>
+          <button>여행</button>
+        </div>
+      </div>
+    </div>
+    <!-- nav 오른쪽 요소들 -->
+    <div class="nav-right">
+      <button class="header_search-icon" onclick="openSearch()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+      <a href="" class="header_herat-icon">
+        <button>
+          <i class="fa-regular fa-heart"></i>
+        </button>
+      </a>
+    </div>
+
+    <!-- 검색 모달창 -->
+    <div class="header_search-box" id="header_searchBox">
+      <!-- 왼쪽 상단 로고 -->
+      <div class="search-box-logo">
+        <a href="/pages/home/home.html" class="logo-title">
+          <img src="/assets/Preview.png" />
+        </a>
+      </div>
+
+      <!-- 검색 입력창 -->
+      <div class="inner">
+        <div class="inner-search">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="제목을 입력하세요"
+          />
+          <button
+            id="searchBtn"
+            onclick="searchBooks()"
+            class="fas fa-search icon-button"
+          ></button>
+        </div>
+        <!-- 오늘의 편집자 추천 책 -->
+         <div class="header_suggestedBook_title" id="header_suggestedBook_title">
+          <strong>오늘의 추천 책:</strong>
+         </div>
+        <button class="closeBtn" onclick="closeSearch()">&times;</button>
+      </div>
+
+    <!-- 사이드바 (모바일용) -->
+  </nav>
 </header>

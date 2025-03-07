@@ -1,35 +1,225 @@
-.fixed-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+.navbar {
+  background-color: #f8f3d9 !important;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.fixed-header h1 {
-    margin: 0;
-    font-size: 1.5rem;
+.logo-title {
+  text-decoration: none;
+  margin-left: 30px;
+  margin-right: 60px;
 }
 
-.fixed-header a {
-    color: white;
-    text-decoration: none;
+.logo-title img {
+  width: 100px;
+  height: 80px;
 }
 
-.fixed-header nav a {
-    margin-left: 20px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+.header_menus {
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
 }
 
-.fixed-header nav a:hover {
-    background-color: #555;
+.header_menus .header_menu-item {
+  position: relative;
+}
+
+.header_dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 10px 0;
+  min-width: 150px;
+}
+
+.header_dropdown-menu button {
+  display: block;
+  padding: 8px 15px;
+  color: #333;
+}
+
+.header_dropdown-menu a:hover {
+  background-color: #f1f1f1;
+}
+
+.header_menu-item:hover .header_dropdown-menu {
+  display: block;
+}
+
+.header_menus button {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-weight: bolder;
+  cursor: pointer;
+  color: #333;
+}
+.header_menus button:hover {
+  text-decoration: underline;
+}
+
+/* navbar 오른쪽 아이콘들 */
+
+.nav-right button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.header_search-icon {
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.header_search-icon i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* 검색창 모달 */
+.header_search-box {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 100%;
+  height: 400px; /* 높이 조정 */
+  background-color: #f8f3d9;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between; /* 요소들 사이에 공간 배분 */
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  border-radius: 0 0 10px 10px;
+}
+
+/* 왼쪽 상단 로고 */
+.search-box-logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  width: 80px;
+}
+
+.header_search-box.active {
+  transform: translate(-50%, 0); /* 아래로 슬라이드 */
+}
+
+.header_search-box .inner {
+  margin-top: 50px;
+  background: #f8f3d9;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 400px;
+  max-width: 80%;
+}
+
+.inner-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.inner-search input {
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+}
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+}
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #363636;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.inner-search input:-webkit-autofill,
+.inner-search input:-webkit-autofill:hover,
+.inner-search input:-webkit-autofill:focus {
+  background: none !important;
+  box-shadow: 0 0 0px 1000px white inset !important; /* 강제로 배경색을 흰색으로 덮기 */
+  -webkit-text-fill-color: #333 !important; /* 글씨 색 유지 */
+  transition: background-color 5000s ease-in-out 0s; /* 배경색 변화 방지 */
+}
+.header_herat-icon {
+  margin-right: 60px;
+}
+
+.header_herat-icon i {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.menu-custom-card {
+  background-color: #f4f5f6;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.menu-custom-card-img {
+  width: 138px;
+  height: 226px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.menu-title {
+  color: #000000;
+  font-size: 13px;
+  padding: 5px 0px;
+}
+
+.menu-ice {
+  color: #000000;
+  font-size: 11px;
+}
+
+.header_suggestedBook_title {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.suggested-keyword {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #ffcc00;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.suggested-keyword:hover {
+  background-color: #ffae00;
 }
