@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   const API_KEY = "ttbchuo_o1910001 ";
   let page = 1;
-  const pageSize = 50;
+  const pageSize = 20;
   let totalResults = 0;
 
+  let categorySliderInterval = null;
+
   const categoryMap = {
-    전체: 0,
     문학: 1,
-    에세이: 55,
-    자기계발: 336, // 자기계발
-    교양: 119, // 인문학을 교양의 대표 카테고리로 설정
-    라이프스타일: 1230, // 가정/요리/뷰티를 라이프스타일의 대표 카테고리로 설정
+    에세이: 55889,
+    자기계발: 336,
+    교양: 656,
+    라이프스타일: 1230,
   };
 
   // 메인 배너 이미지 순환
@@ -19,21 +20,58 @@ document.addEventListener("DOMContentLoaded", function () {
   // 페이지 로드 시 데이터 불러오기
   fetchBestsellers();
   fetchNewReleases();
-  fetchCategoryBestsellers(0); // 기본 카테고리: 전체
+  fetchCategoryBestsellers(1);
 
   // 카테고리 탭 클릭 이벤트 설정
   const categoryTabs = document.querySelectorAll(
     ".home-category-bestseller .home-category-item"
   );
+
+  // 카테고리 탭에 data-category-id 속성 추가
   categoryTabs.forEach((tab) => {
+    const categoryName = tab.textContent.trim();
+    const categoryId = categoryMap[categoryName] || 0;
+    tab.setAttribute("data-category-id", categoryId);
+
     tab.addEventListener("click", function () {
       categoryTabs.forEach((t) => t.classList.remove("active"));
       this.classList.add("active");
 
-      const categoryId = this.getAttribute("data-category-id") || 0;
+      const categoryId = this.getAttribute("data-category-id");
+      console.log(`클릭된 카테고리: ${categoryName}, ID: ${categoryId}`);
+
+      // 카테고리 슬라이더 리셋 및 데이터 불러오기
+      resetCategorySlider();
       fetchCategoryBestsellers(categoryId);
     });
   });
+
+  // 카테고리 슬라이더 리셋 함수
+  function resetCategorySlider() {
+    console.log("카테고리 슬라이더 리셋 중...");
+
+    // 자동 슬라이드 타이머 정리
+    if (categorySliderInterval) {
+      clearInterval(categorySliderInterval);
+      categorySliderInterval = null;
+    }
+
+    // 슬라이더 요소 가져오기
+    const slider = document.getElementById("categorySlider");
+    if (!slider) {
+      console.warn("카테고리 슬라이더 요소를 찾을 수 없습니다.");
+      return;
+    }
+
+    // 슬라이더 초기화 (transition 없이)
+    slider.style.transition = "none";
+    slider.style.transform = "translateX(0)";
+
+    // 기존에 복제된 모든 요소 제거
+    slider.innerHTML = "";
+
+    console.log("카테고리 슬라이더 리셋 완료.");
+  }
 
   // 배너 이미지 순환 기능
   function initBannerRotation() {
@@ -131,7 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
           "newNextBtn",
           "newPageInfo",
           3000,
-          "next"
+          "next",
+          false
         );
       }
     } catch (error) {
@@ -139,9 +178,6 @@ document.addEventListener("DOMContentLoaded", function () {
       errorRender("신작 도서", error.message);
     }
   }
-
-  // 전역 변수로 슬라이더 관련 정보 추적
-  let categorySliderInterval = null;
 
   // 카테고리별 베스트셀러 데이터 가져오기
   async function fetchCategoryBestsellers(categoryId) {
@@ -162,16 +198,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (data) {
         displayCategoryBooks(data.item);
 
-        // 카테고리별 베스트셀러 슬라이더 초기화
-        initInfiniteSlider(
-          "categorySlider",
-          "catPrevBtn",
-          "catNextBtn",
-          "catPageInfo",
-          3000,
-          "next",
-          true
-        );
+        setTimeout(() => {
+          initInfiniteSlider(
+            "categorySlider",
+            "catPrevBtn",
+            "catNextBtn",
+            "catPageInfo",
+            3000,
+            "next",
+            false
+          );
+        }, 50);
       }
     } catch (error) {
       console.error(
@@ -389,7 +426,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // 도서 데이터 추출
     const bookData = extractBookData(sliderItems);
     setupInitialFeaturedBook();
-    updateSlideInfo();
 
     // 자동 슬라이드 기능
     let autoSlideInterval = setInterval(() => autoSlide(), autoPlayInterval);
@@ -502,16 +538,12 @@ document.addEventListener("DOMContentLoaded", function () {
       slider.style.transform = `translateX(-${
         currentSlideIndex * itemWidth
       }px)`;
-      updateSlideInfo();
     }
 
     // 페이지 정보 업데이트
     function updateSlideInfo() {
       if (pageInfo) {
-        pageInfo.textContent = `${currentSlideIndex + 1} / ${Math.min(
-          totalSlides,
-          maxSlideIndex + 1
-        )}`;
+        pageInfo.textContent = ""; // 페이지 정보 비우기
       }
     }
 
@@ -572,6 +604,11 @@ document.addEventListener("DOMContentLoaded", function () {
       slide(defaultDirection);
     }, autoPlayInterval);
 
+    // 카테고리 슬라이더인 경우 전역 변수에 저장
+    if (sliderId === "categorySlider") {
+      categorySliderInterval = autoSlideInterval;
+    }
+
     // 이벤트 리스너 설정
     setupEventListeners();
 
@@ -587,14 +624,17 @@ document.addEventListener("DOMContentLoaded", function () {
       cloneLast.forEach((item) => slider.insertBefore(item, slider.firstChild));
 
       // 초기 위치 설정
-      const itemWidth = sliderItems[0].offsetWidth + 40;
-      slider.style.transform = `translateX(-${
-        sliderItems.length * itemWidth
-      }px)`;
-      slider.style.transition = "none";
-
-      // 리플로우 강제
-      slider.offsetHeight;
+      setTimeout(() => {
+        const itemWidth = sliderItems[0].offsetWidth + 40;
+        currentIndex = 0;
+        slider.style.transition = "none";
+        // 슬라이더 위치를 정확하게 설정하여 첫 번째 요소가 완전히 보이도록 함
+        slider.style.transform = `translateX(-${
+          itemWidth * sliderItems.length
+        }px)`;
+        console.log(`슬라이더 위치 설정: -${itemWidth * sliderItems.length}px`);
+        slider.offsetHeight; // 리플로우 강제
+      }, 50); // 타이밍을 더 늘려 DOM이 완전히 로드된 후 실행되도록 함
     }
 
     // 이벤트 리스너 설정
@@ -732,8 +772,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 600);
         }
       }
-
-      updateSlideInfo();
     }
 
     // 자동 슬라이드 리셋
@@ -742,14 +780,10 @@ document.addEventListener("DOMContentLoaded", function () {
       autoSlideInterval = setInterval(() => {
         slide(defaultDirection);
       }, autoPlayInterval);
-    }
 
-    // 페이지 정보 업데이트
-    function updateSlideInfo() {
-      if (pageInfo) {
-        const pageNumber =
-          (((currentIndex % itemsCount) + itemsCount) % itemsCount) + 1;
-        pageInfo.textContent = `${pageNumber} / ${itemsCount}`;
+      // 카테고리 슬라이더인 경우 전역 변수 업데이트
+      if (sliderId === "categorySlider") {
+        categorySliderInterval = autoSlideInterval;
       }
     }
   }
