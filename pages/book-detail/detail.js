@@ -1,39 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const itemId = urlParams.get("itemId") || '356320035';
-let bookData = {
-    "title": "이별할 땐 문어",
-    "link": "http://www.aladin.co.kr/shop/wproduct.aspx?ItemId=359106312&amp;partner=openAPI&amp;start=api",
-    "author": "정진아 (지은이), 김지현 (옮긴이)",
-    "pubDate": "2025-03-05",
-    "description": "국내에 처음 소개되는 한국계 미국인 작가 정진아의 『이별할 땐 문어』는 서른을 맞은 주인공 ‘로’의 사랑과 이별, 상처와 성장, 동물 친구와의 교감을 다룬다. 더불어 서른이라는 나이에 새로운 관점을 제안한다.",
-    "isbn": "K302037592",
-    "isbn13": "9791170612162",
-    "itemId": 359106312,
-    "priceSales": 16200,
-    "priceStandard": 18000,
-    "mallType": "BOOK",
-    "stockStatus": "",
-    "mileage": 900,
-    "cover": "https://image.aladin.co.kr/product/35910/63/coversum/k302037592_1.jpg",
-    "categoryId": 50919,
-    "categoryName": "국내도서>소설/시/희곡>영미소설",
-    "publisher": "복복서가",
-    "salesPoint": 650,
-    "adult": false,
-    "fixedPrice": true,
-    "customerReviewRank": 0,
-    "subInfo": {
-        "subTitle": "세상의 모든 전략과 전술",
-        "originalTitle": "Sea Change",
-        "itemPage": 408,
-        "ratingInfo": {
-            "ratingScore": 0,
-            "ratingCount": 0,
-            "commentReviewCount": 0,
-            "myReviewCount": 0
-        }
-    }
-};
+const likeButton = document.querySelector('.detail_button-like');
+const linkButton = document.querySelector('.detail_button-link');
+let bookData = {};
 
 // 책 정보 가져오기
 async function getBookDetail() {
@@ -46,12 +15,10 @@ async function getBookDetail() {
         searchParams.set('OptResult', 'ratingInfo');
 
         const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
-        console.log('book detail url : ', url);
 
         const response = await fetch(url);
         const data = await response.json();
 
-        console.log('도서 상세정보 data', data);
         bookData = data.item[0];
 
         if(bookData) {
@@ -86,8 +53,6 @@ const renderBookTitleAndCover = () => {
 
 // 요약 정보
 const renderBookSummary = () => {
-    console.log('render Book Detail : ', bookData);
-    
     let summaryHTML = ``;
     // 원서명
     if(bookData.subInfo.originalTitle) {
@@ -113,6 +78,11 @@ const renderBookSummary = () => {
                     </li>`;
 
     document.querySelector('.detail_summary').innerHTML = summaryHTML;
+
+    // 찜하기 여부
+    if(isLiked()) {
+        likeButton.classList.add('active');
+    }
 };
 
 // 그 외 기본 정보 출력
@@ -140,6 +110,7 @@ const renderBasicInfos = () => {
     document.getElementById('detail_description').textContent = bookData.description;
 }
 
+// 점수 별 5개로 출력하기
 const renderRating = () => {
     const ratingInfo = bookData.subInfo.ratingInfo;
 
@@ -172,8 +143,49 @@ const renderRating = () => {
         document.querySelector('.detail_rating-text').textContent = ratingInfo.ratingScore;
         document.getElementById('detail_rating-count').textContent = `(${ratingInfo.ratingCount}건)`;
     }
-
 }
 
+/**
+ * 찜하기 관련
+ */
+const getLikedItems = () => {
+    const likedItems = localStorage.getItem("likedItems");
+    return likedItems ? JSON.parse(likedItems) : []; 
+}
+
+const isLiked = () => {
+    return getLikedItems().some((item) => item.itemId === bookData.itemId);
+}
+
+const toggleLike = () => {
+    const likedItems = getLikedItems();
+    const index = likedItems.findIndex( item => item.itemId === bookData.itemId);
+    if(index === -1) {
+        likedItems.push(bookData);
+        likeButton.classList.add('active');
+    } else {
+        likedItems.splice(index, 1);
+        likeButton.classList.remove('active');
+    }
+
+    localStorage.setItem('likedItems', JSON.stringify(likedItems));
+}
+
+const copyLink = async() => {
+    try {
+        // 현재 페이지 URL 가져오기
+        const currentUrl = window.location.href;
+        
+        // 클립보드에 복사
+        await navigator.clipboard.writeText(currentUrl);
+        
+        // 성공 메시지 표시
+    } catch (error) {
+        console.error('링크 복사 실패:', error);
+        // 실패 메시지 표시
+    }
+}
 
 getBookDetail();
+likeButton.addEventListener("click", toggleLike);
+linkButton.addEventListener("click", copyLink);
