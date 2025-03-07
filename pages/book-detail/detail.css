@@ -1,256 +1,315 @@
-/*
-#F8F3D9
-#EBE5C2
-#B9B28A
-#504B38
-*/
-@media screen and (min-width: 1024px) {
-    * {
-        margin: 0;
-    }
+* {
+    margin: 0;
+}
 
-    body {
-        color: #000;
-        font-size: 1rem;
-        font-family: Pretendard, Noto Sans KR, Malgun Gothic, 맑은고딕, Dotum, 굴림, Gulim, Helvetica, sans-serif;
-        line-height: 1.5;
-    }
-    
-    /* 책 디테일 섹션 */
+body {
+    color: #000;
+    font-size: 1rem;
+    font-family: Pretendard, Noto Sans KR, Malgun Gothic, 맑은고딕, Dotum, 굴림, Gulim, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+/* 책 디테일 섹션 */
+
+.detail_container > .detail_contents:first-child {
+    padding-top: 80px;
+}
+
+.detail_container button {
+    cursor: pointer;
+    padding: 0;
+    border: 0;
+}
+
+.detail_container ul, .detail_container li {
+    list-style: none;
+}
+
+.detail_contents {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+ 
+.detail_book-detail {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 80px;
+}
+
+.detail_button-area {
+    flex-shrink: 0;
+    position: relative;
+    margin-right: 7.334%;
+}
+
+.detail_button-area button {
+    display: block;
+    font-size: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-position: 50% 50%;
+    background-size: 24px;
+    transition: all 0.2s ease;
+}
+
+.detail_blind {
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.detail_button-link {
+    margin-bottom: 8px;
+    color: white;
+    background-color: #0000004d;
+    background-repeat: no-repeat;
+}
+
+.detail_button-like {
+    color: #333;
+}
+
+.detail_button-like.active, .detail_button-like:hover {
+    color: red;
+}
+
+.detail_thumb {
+    position: relative;
+    width: 33.334%;
+    margin-right: 5%;
+}
+
+.detail_book-detail .detail_thumb .detail_m_bg {
+    display: none;
+}
+
+.detail_thumb img {
+    width: 100%;
+    max-width: 100%;
+}
+
+.detail_book-title {
+    font-size: 28px;
+    margin: 0;
+}
+
+.detail_sub-title {
+    font-size: 18px;
+    margin-top: .5rem;
+}
+
+.detail_book-info {
+    width: 50%;
+    padding: 22px 0 0;
+    border-top: 2px solid #000;
+}
+
+.detail_bi-title {
+    width: 120px;
+    flex-shrink: 0;
+    font-weight: 500;
+}
+
+.detail_summary {
+    margin: 0;
+    margin-top: 24px;
+    padding: 19px 0 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.detail_summary li, .detail_basic-info li {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: .75rem;
+    color: #333;
+    font-size: .875rem;
+}
+
+.detail_summary li+li, .detail_basic-info>li>ul li+li {
+    margin-top: 12px;
+}
+
+.detail_basic-info {
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.detail_basic-info>li {
+    border-top: 1px solid #f0f0f0;
+    padding: 19px 0 20px;
+}
+
+.detail_basic-info>li>ul {
+    padding: 5px 0 4px;
+    width: 100%;
+}
+
+.detail_bi-title+div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: calc(100% - 132px);
+}
+
+.detail_rating {
+    column-gap: .75rem;
+}
+
+.detail_rating-stars i {
+    font-size: 1.1rem;
+    margin-right: 2px;
+}
+
+.fa-star, .fa-star-half-o {
+    color : #ffd700;
+}
+
+.fa-star-o {
+    color: #e0e0e0;
+}
+
+.detail_rating-text {
+    font-weight: 600;
+}
+
+.detail_rating-count {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.detail_price {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    line-height: 1.25rem;
+}
+
+.detail_price b {
+    font-size: 20px;
+}
+
+.detail_buy-link {
+    margin-left: auto;
+}
+
+.detail_buy-link a {
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    column-gap: .2rem;
+}
+
+.detail_buy-link a img {
+    max-width: 50px;
+}
+
+/* 책 소개 섹션 */
+.detail_description-section {
+    padding: 0 50px 80px;
+}
+
+.detail_desc-title {
+    font-size: 24px;
+    margin-bottom: 1.25rem;
+    line-height: 1;
+}
+
+.detail_description {
+    word-break: break-all;
+    line-height: 180%;
+    font-weight: 400;
+    color: #333;
+}
+
+
+
+@media screen and (max-width: 1023px) {
 
     .detail_container > .detail_contents:first-child {
-        padding-top: 80px;
-    }
-    
-    .detail_container button {
-        cursor: pointer;
-        padding: 0;
-        border: 0;
-    }
-
-    .detail_container ul, .detail_container li {
-        list-style: none;
-    }
-
-    .detail_contents {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 1.25rem;
-    }
-     
-    .detail_book-detail {
-        display: flex;
-        align-items: flex-start;
-        padding-bottom: 80px;
+        padding-top: 40px;
     }
 
     .detail_button-area {
-        flex-shrink: 0;
-        position: relative;
-        margin-right: 7.334%;
+        position: absolute;
+        top: 0;
+        right: 1.25rem;
+        margin-right: 0;
+        display: flex;
+        z-index: 10;
     }
 
     .detail_button-area button {
-        display: block;
-        /* font-size: 20px; */
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        background-position: 50% 50%;
-        background-size: 24px;
-        /* transition: all 0.2s ease; */
+        width: 40px;
+        height: 40px;
+        background-size: 20px;
+        font-size: 1.5rem;
     }
-    
-    .detail_blind {
-        overflow: hidden;
-        position: absolute;
-        width: 0;
-        height: 0;
-        margin: -1px;
-        clip: rect(0, 0, 0, 0);
-    }
-    
+
     .detail_button-link {
-        margin-bottom: 8px;
-        color: white;
-        background-color: #0000004d;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23767676' d='M11 17H7q-2.075 0-3.537-1.463T2 12t1.463-3.537T7 7h4v2H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h4zm-3-4v-2h8v2zm5 4v-2h4q1.25 0 2.125-.875T20 12t-.875-2.125T17 9h-4V7h4q2.075 0 3.538 1.463T22 12t-1.463 3.538T17 17z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
+        margin-bottom: 0;
+        margin-right: 8px;
     }
 
-    .detail_button-like {
-        /* width: 1.5rem;
-        height: 1.5rem; */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7zm0-2.7q2.4-2.15 3.95-3.687t2.45-2.675t1.25-2.026T20 8.15q0-1.5-1-2.5t-2.5-1q-1.175 0-2.175.662T12.95 7h-1.9q-.375-1.025-1.375-1.687T7.5 4.65q-1.5 0-2.5 1t-1 2.5q0 .875.35 1.763t1.25 2.025t2.45 2.675T12 18.3m0-6.825'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-    }
-
-    .detail_button-like.active, .detail_button-like:hover {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF0000' d='m12 21l-1.45-1.3q-2.525-2.275-4.175-3.925T3.75 12.812T2.388 10.4T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.3 0 2.475.55T12 4.75q.85-1 2.025-1.55t2.475-.55q2.35 0 3.925 1.575T22 8.15q0 1.15-.387 2.25t-1.363 2.412t-2.625 2.963T13.45 19.7z'/%3E%3C/svg%3E");
-        /* color: red; */
+    .detail_book-detail {
+        flex-direction: column;
+        padding-bottom: 40px;
+        position: relative;
     }
 
     .detail_thumb {
-        position: relative;
-        width: 33.334%;
-        margin-right: 5%;
-    }
-
-    .detail_book-detail .detail_thumb .detail_m_bg {
-        display: none;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: center;
     }
 
     .detail_thumb img {
+        width: auto;
+        max-width: 280px;
+        max-height: 400px;
+    }
+
+    .detail_book-detail .detail_thumb .detail_m_bg {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        max-width: 100%;
-    }
-
-    .detail_book-title {
-        font-size: 28px;
-        margin: 0;
-    }
-
-    .detail_sub-title {
-        font-size: 18px;
-        margin-top: .5rem;
+        height: 100%;
+        background-color: #0000004d;
+        background-position: center;
+        background-size: cover;
+        filter: blur(10px);
+        opacity: 0.3;
+        z-index: -1;
     }
 
     .detail_book-info {
-        width: 50%;
-        padding: 22px 0 0;
-        border-top: 2px solid #000;
-    }
-
-    .detail_bi-title {
-        width: 120px;
-        flex-shrink: 0;
-        font-weight: 500;
-    }
-
-    .detail_summary {
-        margin: 0;
-        margin-top: 24px;
-        padding: 19px 0 20px;
-        border-top: 1px solid #f0f0f0;
-    }
-    
-    .detail_summary li, .detail_basic-info li {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: .75rem;
-        color: #333;
-        font-size: .875rem;
-    }
-
-    .detail_summary li+li, .detail_basic-info>li>ul li+li {
-        margin-top: 12px;
-    }
-
-    .detail_basic-info {
-        border-bottom: 1px solid #f0f0f0;
-        margin: 0;
-        padding: 0;
-    }
-
-    .detail_basic-info>li {
-        border-top: 1px solid #f0f0f0;
-        padding: 19px 0 20px;
-    }
-
-    .detail_basic-info>li>ul {
-        padding: 5px 0 4px;
         width: 100%;
     }
 
+    .detail_bi-title {
+        width: 80px;
+    }
+
     .detail_bi-title+div {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        width: calc(100% - 132px);
+        width: calc(100% - 92px);
     }
 
-    .detail_rating {
-        column-gap: .75rem;
-    }
-
-    .detail_rating-stars i {
-        font-size: 1.1rem;
-        margin-right: 2px;
-    }
-
-    .fa-star, .fa-star-half-o {
-        color : #ffd700;
-    }
-
-    .fa-star-o {
-        color: #e0e0e0;
-    }
-
-    .detail_rating-text {
-        font-weight: 600;
-    }
-
-    .detail_rating-count {
-        font-size: 0.8rem;
-        color: #666;
-    }
-
-    .detail_price {
-        font-size: 18px;
-        font-weight: 500;
-        color: #000;
-        line-height: 1.25rem;
-    }
-
-    .detail_price b {
-        font-size: 20px;
-    }
-
-    .detail_buy-link {
-        margin-left: auto;
-    }
-
-    .detail_buy-link a {
-        color: #000;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        column-gap: .2rem;
-    }
-
-    .detail_buy-link a img {
-        max-width: 50px;
-    }
-
-    /* 책 디테일 섹션 */
     .detail_description-section {
-        padding: 0 50px 80px;
+        padding: 0 1.25rem 60px;
     }
 
     .detail_desc-title {
-        font-size: 24px;
-        margin-bottom: 1.25rem;
-        line-height: 1;
-    }
-
-    .detail_description {
-        word-break: break-all;
-        line-height: 180%;
-        font-weight: 400;
-        color: #333;
-    }
-    
-}
-
-@media (max-width: 1023px) {
-
-    .detail_container {
-        width: 90%;
-    }
-
-    
-    .detail_button-area button {
-        display: none;
+        font-size: 20px;
     }
 
 }

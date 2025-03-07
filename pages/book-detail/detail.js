@@ -81,6 +81,9 @@ const renderBookSummary = () => {
 
     // 찜하기 여부
     if(isLiked()) {
+        const btnImg = document.querySelector('.detail_button-like>i');
+        btnImg.classList.remove('fa-heart-o');
+        btnImg.classList.add('fa-heart');
         likeButton.classList.add('active');
     }
 };
@@ -159,13 +162,21 @@ const isLiked = () => {
 
 const toggleLike = () => {
     const likedItems = getLikedItems();
-    const index = likedItems.findIndex( item => item.itemId === bookData.itemId);
+    const index = likedItems.findIndex( item => item.itemId === bookData.itemId );
+
+    const btnImg = document.querySelector('.detail_button-like>i');
     if(index === -1) {
         likedItems.push(bookData);
         likeButton.classList.add('active');
+
+        btnImg.classList.remove('fa-heart-o');
+        btnImg.classList.add('fa-heart');
     } else {
         likedItems.splice(index, 1);
         likeButton.classList.remove('active');
+
+        btnImg.classList.remove('fa-heart');
+        btnImg.classList.add('fa-heart-o');
     }
 
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
