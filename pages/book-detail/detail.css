@@ -228,6 +228,62 @@ body {
     color: #333;
 }
 
+/* 팝업 알람창 */
+.detail_system-alert {
+    display: none;
+    position:fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.detail_dim {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #0009;
+}
+
+.detail_system-alert .detail_popup {
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 2.5rem);
+    max-width: 400px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+.detail_pop-cont {
+    padding: 2rem;
+    text-align: center;
+}
+
+.detail_alert-msg {
+    word-break: keep-all;
+}
+
+.detail_pop-foot {
+    display: flex;
+    justify-content: center;
+}
+
+.detail_pop-foot-button {
+    font-family: inherit;
+    height: 3.25rem;
+    flex: 1;
+    width: 100%;
+    padding: 0 1rem;
+    color: #fff;
+    border-color: #000;
+    background-color: #000;
+    cursor: pointer;
+}
 
 
 @media screen and (max-width: 1023px) {

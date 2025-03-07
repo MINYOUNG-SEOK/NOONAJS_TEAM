@@ -27,11 +27,12 @@ async function getBookDetail() {
             renderBasicInfos();
             renderRating();
         } else {
-            //renderError();
+            openPopup('도서 정보가 존재하지 않습니다.<br/>확인을 누르면 이전 페이지로 이동합니다.', 'error');
         }
         
     } catch(error) {
         console.log('데이터 가져오기 실패: ', error);
+        openPopup('문제가 발생했습니다.<br/>확인을 누르면 이전 페이지로 이동합니다.', 'error');
     }
 }
 
@@ -113,6 +114,22 @@ const renderBasicInfos = () => {
     document.getElementById('detail_description').textContent = bookData.description;
 }
 
+const openPopup = (message, type) => {
+    document.querySelector('.detail_alert-msg').innerHTML = message;
+    document.querySelector('.detail_system-alert').style.display = 'block';
+
+    document.querySelector('.detail_pop-foot-button').addEventListener('click', () => closePopup(type));
+}
+
+const closePopup = (type) => {
+    if(type === 'alert') {
+        document.querySelector('.detail_alert-msg').innerHTML = '';
+        document.querySelector('.detail_system-alert').style.display = 'none';
+    } else {
+        history.back();
+    }
+}
+
 // 점수 별 5개로 출력하기
 const renderRating = () => {
     const ratingInfo = bookData.subInfo.ratingInfo;
@@ -191,9 +208,11 @@ const copyLink = async() => {
         await navigator.clipboard.writeText(currentUrl);
         
         // 성공 메시지 표시
+        openPopup('URL을 복사하였습니다', 'alert');
     } catch (error) {
         console.error('링크 복사 실패:', error);
         // 실패 메시지 표시
+        openPopup('URL을 복사하지 못했습니다', 'alert');
     }
 }
 
