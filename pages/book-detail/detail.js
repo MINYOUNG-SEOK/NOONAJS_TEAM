@@ -1,5 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-const itemId = urlParams.get("itemId") || '356320035';
+const itemId = urlParams.get("itemId") || '';
 const likeButton = document.querySelector('.detail_button-like');
 const linkButton = document.querySelector('.detail_button-link');
 let bookData = {};
