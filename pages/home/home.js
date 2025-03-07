@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookItem.className = "home-bestseller-slider__item";
       bookItem.setAttribute("data-index", index);
       bookItem.addEventListener("click", () => {
-        window.location.href = `../book-detail/detail.html?itiemId=${book.itemId}`;
+        window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
       });
       bookItem.innerHTML = `
         <img src="${book.cover}" alt="${book.title}">
@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookItem.className = "home-bestseller-slider__item";
       bookItem.setAttribute("data-index", index);
       bookItem.addEventListener("click", () => {
-        window.location.href = `../book-detail/detail.html?itiemId=${book.itemId}`;
+        window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
       });
       bookItem.innerHTML = `
         <img src="${book.cover}" alt="${book.title}">
@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookItem.className = "home-bestseller-slider__item";
       bookItem.setAttribute("data-index", index);
       bookItem.addEventListener("click", () => {
-        window.location.href = `../book-detail/detail.html?itiemId=${book.itemId}`;
+        window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
       });
       bookItem.innerHTML = `
         <img src="${book.cover}" alt="${book.title}">
@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", function () {
       autoSlideIntervalId = setInterval(autoSlide, autoPlayInterval);
     }
     function updateSlider() {
-      const itemWidth = sliderItems[0].offsetWidth + 40;
+      const itemWidth = sliderItems[0].offsetWidth + 30;
       slider.style.transition = "transform 0.6s ease";
       slider.style.transform = `translateX(-${
         currentSlideIndex * itemWidth
