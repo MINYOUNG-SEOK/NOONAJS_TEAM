@@ -19,7 +19,7 @@
   background: none;
   color: rgb(60, 60, 60);
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 50px;
 }
 
 .category:hover {
@@ -44,22 +44,29 @@
   margin: 0 auto;
 }
 
-.book {
+.book-card {
   padding-top: 40px;
   width: 220px;
   /* border: 1px solid #ddd; */
   
 }
 
-.book img {
+#book-list img {
   border: 1px solid #ddd;
   margin: 0 auto;
   min-height: 200px;
+  max-height: 300px;
   object-fit: contain;
   display: block;
   width: 170px;
   height: auto;
 
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#book-list img:hover{
+  transform: scale(1.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 호버 시 약간의 그림자 추가 */
 }
 
 
@@ -90,12 +97,30 @@
 /* 페이지네이션 아래 */
 #category-page-box{
 padding: 50px 0;
-border: 1px solid blue;
-text-align: center;
+
 }
 
-#pageNumbers{
+.pagination{
   font-size: 17px;
   color: #767676;
-  padding: 0 12px;
+  display: flex;
+  justify-content: center;
 }
+
+.page-link{
+  border: none;
+  color: #999;
+  cursor: pointer;
+}
+
+.page-link:hover{
+  background-color: #fff;
+  border-color: #F8F3D9;
+  color: #141414;
+}
+
+.active>.page-link, .page-link.active {
+  background-color: #B9B28A;
+  border-color: #B9B28A;
+}
+
