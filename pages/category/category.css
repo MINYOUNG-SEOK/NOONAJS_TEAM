@@ -1,0 +1,126 @@
+/* F8F3D9 EBE5C2 B9B28A 504B38 */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.category-nav {
+  margin-top: 50px;
+  text-align: center;
+
+}
+
+.category {
+  padding: 10px 12px;
+  margin: 5px;
+  border: none;
+  background: none;
+  color: rgb(60, 60, 60);
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.category:hover {
+  background-color: #ffe8a9;
+}
+
+#category-container{
+  width: 80%;
+  border: 2px solid black;
+  margin: 0 auto;
+}
+
+
+
+
+#book-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 87%;
+  margin: 0 auto;
+}
+
+.book-card {
+  padding-top: 40px;
+  width: 220px;
+  /* border: 1px solid #ddd; */
+  
+}
+
+#book-list img {
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  min-height: 200px;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+  width: 170px;
+  height: auto;
+
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#book-list img:hover{
+  transform: scale(1.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* 호버 시 약간의 그림자 추가 */
+}
+
+
+#book-list .categories-title {
+  /* border: 1px solid #ddd; */
+  font-size: 16px;
+  font-weight: 500;
+  padding: 15px 20px 10px 25px;
+  color: #2d2d2d;
+}
+
+#book-list .categories-author{
+  font-size: 13px;
+  font-weight: 400; 
+  color: #767676;
+  padding-left: 25px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 최대 2줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+
+
+/* 페이지네이션 아래 */
+#category-page-box{
+padding: 50px 0;
+
+}
+
+.pagination{
+  font-size: 17px;
+  color: #767676;
+  display: flex;
+  justify-content: center;
+}
+
+.page-link{
+  border: none;
+  color: #999;
+  cursor: pointer;
+}
+
+.page-link:hover{
+  background-color: #fff;
+  border-color: #F8F3D9;
+  color: #141414;
+}
+
+.active>.page-link, .page-link.active {
+  background-color: #B9B28A;
+  border-color: #B9B28A;
+}
+

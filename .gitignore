@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+#API_KEY
+.env.json
+=======
 # 로컬 개발 환경 파일
 node_modules/
 .env
@@ -13,3 +17,4 @@ yarn-error.log*
 # 운영체제 파일
 .DS_Store
 Thumbs.db
+>>>>>>> develop
