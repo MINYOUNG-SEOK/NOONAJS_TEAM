@@ -11,17 +11,19 @@ const categoryMapping = {
     '에세이' : ['에세이'],
     '자기계발' : ['자기계발'],
     '교양' : ['인문학', '사회과학', '역사'],
-    '라이프스타일' : ['요리/살림', '건강/취미', '여행', '가정/요리/뷰티'],
+    '라이프스타일' : ['요리/살림', '여행'],
 }
 
-const findExactCategory = (categoryPath, searchTerm) => {
+const findExactCategory = (categoryList, searchTerm) => {
     // 전체 카테고리
     if(searchTerm === 'all' || !searchTerm) return true;
 
-    const categories = categoryPath.split('>');
+    return categoryList.some(category => {
+        const categories = category.categoryName.replace('국내도서>','').split('>');
 
-    return categories.some(category => {
-        return categoryMapping[searchTerm].some(subCategory => subCategory === category.trim());
+        return categories.some(cat => {
+            return categoryMapping[searchTerm].some(subCategory => subCategory === cat.trim());
+        });
     });
 }
 
@@ -49,7 +51,7 @@ const getLikedItems = () => {
 
         if(currentCategory) {
             filteredItems = likedItemsList.filter(book => {
-                return book.categoryName && findExactCategory(book.categoryName, currentCategory);
+                return book.categoryIdList && findExactCategory(book.categoryIdList, currentCategory);
             })
         }
 
@@ -148,7 +150,7 @@ const removeLike = (itemId) => {
         localStorage.setItem('likedItems', JSON.stringify(likedItemsList));
 
         filteredItems = currentCategory ? likedItemsList.filter(book => {
-            return book.categoryName && findExactCategory(book.categoryName, currentCategory);
+            return book.categoryIdList && findExactCategory(book.categoryIdList, currentCategory);
         }) : likedItemsList;
 
         // 총 결과 수 업데이트

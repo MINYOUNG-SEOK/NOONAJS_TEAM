@@ -8,11 +8,11 @@ let bookData = {};
 async function getBookDetail() {
     try {
         const searchParams = new URLSearchParams();
-        // ?apiType=ItemLookUp&itemIdType=ItemId&ItemId=${itemId}&OptResult=ratingInfo,authors,reviewList
+        // ?apiType=ItemLookUp&itemIdType=ItemId&ItemId=${itemId}&OptResult=ratingInfo,categoryIdList
         searchParams.set('apiType', 'ItemLookUp');
         searchParams.set('itemIdType', 'ItemId');
         searchParams.set('ItemId', itemId);
-        searchParams.set('OptResult', 'ratingInfo');
+        searchParams.set('OptResult', 'ratingInfo,categoryIdList');
 
         const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
 
