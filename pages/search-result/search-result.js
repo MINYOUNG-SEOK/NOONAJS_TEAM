@@ -21,6 +21,7 @@ async function getSearchResults() {
     searchParams.set("start", currentPage);
     searchParams.set("SearchTarget", "Book");
     searchParams.set("Sort", sortBy);
+    searchParams.set("Cover", "Big");
 
     const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
     console.log("검색 API 요청 URL:", url);
@@ -34,7 +35,7 @@ async function getSearchResults() {
       return;
     }
 
-    document.getElementById("search-results").innerHTML = "";
+    document.getElementById("book-list").innerHTML = "";
     renderResults(data.item);
     paginationRender(data.totalResults, currentPage, query);
   } catch (error) {
@@ -112,24 +113,9 @@ window.onload = function () {
   }
 };
 
-// 화질 개선 함수
-async function getHighResCover(url) {
-  if (!url) return "";
-
-  const highResUrl = url.replace("/coversum/", "/cover600");
-  const fallbackUrl = url.replace("/coversum", "/cover500");
-
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.src = highResUrl;
-    img.onload = () => resolve(highResUrl);
-    img.onerror = () => resolve(fallbackUrl);
-  });
-}
-
 // 화면 렌더링 함수
 async function renderResults(books) {
-  const bookContainer = document.getElementById("search-results");
+  const bookContainer = document.getElementById("book-list");
 
   console.log("화면 렌더링: 새로운 데이터 적용됨");
   console.log("렌더링할 아이템 개수:", books.length);
@@ -138,27 +124,18 @@ async function renderResults(books) {
   bookContainer.innerHTML = "";
 
   for (const book of books) {
-    const lowResCover = book.cover.replace("/coversum/", "/cover130"); // 저해상도 우선 표시
     const bookElement = document.createElement("div");
-    bookElement.classList.add("search_book-card");
-    bookElement.innerHTML = `
-        <div class="book-card">
-          <img class="book-cover" src="${lowResCover}" alt="${book.title}">
-          <div class="book-info">
-            <h3 class="book-title">${book.title}</h3>
-            <p class="book-author">${book.author || "저자 정보 없음"}</p>
-            <p class="book-publisher">${
-              book.publisher || "출판사 정보 없음"
-            }</p>
-          </div>
-        </div>
-      `;
-    bookContainer.appendChild(bookElement);
-
-    // 고해상도 이미지 로드 후 교체
-    getHighResCover(book.cover).then((highResCover) => {
-      bookElement.querySelector(".book-cover").src = highResCover;
+    bookElement.classList.add("book-card");
+    bookElement.addEventListener("click", () => {
+      window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
     });
+    bookElement.innerHTML = `
+      <img class="book-cover" src="${book.cover}" alt="${book.title}">
+      <h3 class="categories-title">${book.title}</h3>
+      <p class="categories-author">${book.author || "저자 정보 없음"}</p>
+    `;
+
+    bookContainer.appendChild(bookElement);
   }
 }
 
@@ -274,6 +251,7 @@ async function getTopRatedBooks(query) {
     searchParams.set("MaxResults", "10");
     searchParams.set("Sort", "SalesPoint"); // 판매 높은 순 정렬
     searchParams.set("SearchTarget", "Book");
+    searchParams.set("Cover", "Big");
 
     const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
     console.log("평점 높은 책 API 요청 URL:", url);
@@ -306,20 +284,16 @@ function renderTopRatedSlider(books) {
   sliderContainer.innerHTML = ""; // 기존 내용 초기화
 
   books.forEach((book) => {
-    const lowResCover = book.cover.replace("/coversum/", "/cover130");
-
     const bookElement = document.createElement("div");
+    bookElement.addEventListener("click", () => {
+      window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
+    });
     bookElement.classList.add("header_top-rated-book");
     bookElement.innerHTML = `
-      <img class="book-cover" src="${lowResCover}" alt="${book.title}">
+      <img class="book-cover" src="${book.cover}" alt="${book.title}">
       <h3>${book.title}</h3>
     `;
     sliderContainer.appendChild(bookElement);
-
-    // 고해상도 이미지 로드 후 교체
-    getHighResCover(book.cover).then((highResCover) => {
-      bookElement.querySelector(".book-cover").src = highResCover;
-    });
   });
 
   setTimeout(() => {

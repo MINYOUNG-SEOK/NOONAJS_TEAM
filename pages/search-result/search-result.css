@@ -1,12 +1,4 @@
 /* 검색 결과 이미지 카드 영역*/
-.search-result {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 10px;
-}
 
 .search_book-card {
   background: white;

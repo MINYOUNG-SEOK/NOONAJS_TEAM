@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       const response = await fetch(`${basePath}components/header/header.html`);
       const data = await response.text();
       document.body.insertAdjacentHTML("afterbegin", data);
-      console.log("✅ 헤더가 정상적으로 로드됨!");
+      console.log("헤더가 정상적으로 로드됨!");
 
       // ✅ 헤더가 로드된 후, header.js를 실행할 준비 완료
       document.dispatchEvent(new Event("headerLoaded"));
