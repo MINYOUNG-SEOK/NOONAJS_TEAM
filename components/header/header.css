@@ -7,6 +7,12 @@
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.navbar button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 .logo-title {
   text-decoration: none;
   margin-left: 30px;
@@ -68,15 +74,20 @@
 }
 
 /* navbar 오른쪽 아이콘들 */
-
 .nav-right button {
   border: none;
   background: transparent;
   cursor: pointer;
 }
+
 .header_search-icon {
   margin-left: auto;
   margin-right: 10px;
+}
+
+.side-icon {
+  margin: 7px;
+  display: none;
 }
 
 .header_search-icon i {
@@ -164,6 +175,7 @@
   -webkit-text-fill-color: #333 !important; /* 글씨 색 유지 */
   transition: background-color 5000s ease-in-out 0s; /* 배경색 변화 방지 */
 }
+
 .header_herat-icon {
   margin-right: 60px;
 }
@@ -222,4 +234,67 @@
 
 .suggested-keyword:hover {
   background-color: #ffae00;
+}
+
+/* 사이드 메뉴바 */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -260px;
+  background-color: #f8f3d9;
+  transition: left 0.3s ease-in-out;
+  padding-top: 20px;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  left: 0px; /* 사이드바 보이도록 */
+}
+
+.sidebar-menus {
+  margin-top: 60px;
+  display: block;
+}
+
+.sidebar-menus button {
+  width: 100%;
+  padding: 10px;
+  color: #333;
+  text-align: left;
+  margin-top: 15px;
+}
+
+.sidebar-menus button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-menus button:active {
+  font-weight: bolder;
+}
+
+.close-btn {
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.close-btn:active {
+  font-weight: bolder;
+}
+
+/* 모바일 반응형 사이드 메뉴바 */
+@media (max-width: 768px) {
+  .header_menus {
+    display: none; /* 기존 메뉴 숨기기 */
+  }
+  .side-icon {
+    display: block; /* 햄버거 버튼 보이기 */
+  }
 }

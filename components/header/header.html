@@ -3,7 +3,7 @@
     <!-- 로고 타이틀 -->
     <a href="/pages/home/home.html" class="logo-title">
       <img src="/assets/Preview.png" />
-    </a>
+    </a>    
     <!-- 카테고리 메뉴 버튼 -->
     <div class="header_menus">
       <div class="header_menu-item">
@@ -34,6 +34,10 @@
     </div>
     <!-- nav 오른쪽 요소들 -->
     <div class="nav-right">
+       <!-- 모바일 사이드바 아이콘 -->
+      <button class="side-icon" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <button class="header_search-icon" onclick="openSearch()">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
@@ -69,11 +73,22 @@
         </div>
         <!-- 오늘의 편집자 추천 책 -->
          <div class="header_suggestedBook_title" id="header_suggestedBook_title">
-          <strong>오늘의 추천 책:</strong>
+          <strong>오늘의 추천 책: </strong>
          </div>
         <button class="closeBtn" onclick="closeSearch()">&times;</button>
       </div>
 
     <!-- 사이드바 (모바일용) -->
+    <div id="sidebar" class="sidebar">
+      <button class="sideBar_close-btn" onclick="toggleMenu()">×</button>
+      <div class="sidebar-menus">
+        <button>문학</button>
+        <button>에세이</button>
+        <button>자기계발</button>
+        <button>교양</button>
+        <button>라이프스타일</button>
+      </div>
+    </div>
+
   </nav>
 </header>

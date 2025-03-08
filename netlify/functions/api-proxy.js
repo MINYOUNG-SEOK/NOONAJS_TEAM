@@ -1,9 +1,13 @@
 // netlify/functions/api-proxy.js
-
 exports.handler = async function (event, context) {
   try {
     // Netlify 환경 변수에서 API 키 가져오기
     const apiKey = process.env.API_KEY;
+    console.log("Netlify 환경 변수 (로컬):", apiKey);
+
+    if (!apiKey) {
+      throw new Error("API_KEY가 정의되지 않았습니다. .env 파일을 확인하세요.");
+    }
 
     // 클라이언트에서 전달된 파라미터
     const params = event.queryStringParameters || {};
