@@ -1,5 +1,5 @@
 const urlParams = new URLSearchParams(window.location.search);
-const itemId = urlParams.get("itemId") || '356320035';
+const itemId = urlParams.get("itemId") || '';
 const likeButton = document.querySelector('.detail_button-like');
 const linkButton = document.querySelector('.detail_button-link');
 let bookData = {};
@@ -27,11 +27,12 @@ async function getBookDetail() {
             renderBasicInfos();
             renderRating();
         } else {
-            //renderError();
+            openPopup('도서 정보가 존재하지 않습니다.<br/>확인을 누르면 이전 페이지로 이동합니다.', 'error');
         }
         
     } catch(error) {
         console.log('데이터 가져오기 실패: ', error);
+        openPopup('문제가 발생했습니다.<br/>확인을 누르면 이전 페이지로 이동합니다.', 'error');
     }
 }
 
@@ -81,7 +82,11 @@ const renderBookSummary = () => {
 
     // 찜하기 여부
     if(isLiked()) {
+        const btnImg = document.querySelector('.detail_button-like>i');
+        btnImg.classList.remove('fa-heart-o');
+        btnImg.classList.add('fa-heart');
         likeButton.classList.add('active');
+        document.querySelector('.detail_button-like>span').textContent = "찜 해제";
     }
 };
 
@@ -108,6 +113,22 @@ const renderBasicInfos = () => {
 
     // 도서소개
     document.getElementById('detail_description').textContent = bookData.description;
+}
+
+const openPopup = (message, type) => {
+    document.querySelector('.detail_alert-msg').innerHTML = message;
+    document.querySelector('.detail_system-alert').style.display = 'block';
+
+    document.querySelector('.detail_pop-foot-button').addEventListener('click', () => closePopup(type));
+}
+
+const closePopup = (type) => {
+    if(type === 'alert') {
+        document.querySelector('.detail_alert-msg').innerHTML = '';
+        document.querySelector('.detail_system-alert').style.display = 'none';
+    } else {
+        history.back();
+    }
 }
 
 // 점수 별 5개로 출력하기
@@ -159,13 +180,24 @@ const isLiked = () => {
 
 const toggleLike = () => {
     const likedItems = getLikedItems();
-    const index = likedItems.findIndex( item => item.itemId === bookData.itemId);
+    const index = likedItems.findIndex( item => item.itemId === bookData.itemId );
+
+    const btnImg = document.querySelector('.detail_button-like>i');
+    const btnSpan = document.querySelector('.detail_button-like>span');
     if(index === -1) {
         likedItems.push(bookData);
         likeButton.classList.add('active');
+
+        btnImg.classList.remove('fa-heart-o');
+        btnImg.classList.add('fa-heart');
+        btnSpan.textContent = '찜 해제';
     } else {
         likedItems.splice(index, 1);
         likeButton.classList.remove('active');
+
+        btnImg.classList.remove('fa-heart');
+        btnImg.classList.add('fa-heart-o');
+        btnSpan.textContent = '찜하기';
     }
 
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
@@ -180,9 +212,11 @@ const copyLink = async() => {
         await navigator.clipboard.writeText(currentUrl);
         
         // 성공 메시지 표시
+        openPopup('URL을 복사하였습니다', 'alert');
     } catch (error) {
         console.error('링크 복사 실패:', error);
         // 실패 메시지 표시
+        openPopup('URL을 복사하지 못했습니다', 'alert');
     }
 }
 
