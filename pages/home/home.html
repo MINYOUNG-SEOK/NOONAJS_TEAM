@@ -15,30 +15,32 @@
 
 <body>
     <main class="container-fluid px-0">
-        <!-- 배너 섹션 -->
+        <!-- 메인 배너 섹션 -->
         <section class="home-banner">
+            <!-- 배너 이미지 -->
             <div class="home-banner__image home-fade-in">
                 <img id="bannerImage" src="./images/banner1.png" alt="배너 이미지">
             </div>
-            <div class="home-banner-indicators" id="bannerIndicators">
-                <!--  -->
-            </div>
+            <!-- 배너 인디케이터 (동적 생성) -->
+            <div class="home-banner-indicators" id="bannerIndicators"></div>
         </section>
 
         <!-- 베스트셀러 섹션 -->
         <section class="home-bestseller-section container">
+            <!-- 섹션 헤더 -->
             <div class="home-section-header row align-items-center">
                 <div class="col-12 d-flex align-items-center">
                     <div class="d-flex">
                         <h2 class="home-section-title mb-0">베스트셀러 도서</h2>
-                        <div class="home-category-nav d-flex align-items-center">
-                            <!-- 카테고리 네비게이션 -->
-                        </div>
+                        <!-- 카테고리 네비게이션 (동적 생성) -->
+                        <div class="home-category-nav d-flex align-items-center"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- 베스트셀러 콘텐츠 영역 -->
             <div class="home-bestseller-content row">
+                <!-- 대표 도서 표시 영역 (좌측) -->
                 <div class="home-featured-book col-12 col-lg-5">
                     <div class="home-featured-book-container">
                         <div class="row g-0">
@@ -59,15 +61,23 @@
                     </div>
                 </div>
 
+                <!-- 베스트셀러 슬라이더 영역 (우측) -->
                 <div class="home-bestseller-slider-section col-12 col-lg-7">
                     <div class="home-bestseller-slider-wrapper">
-                        <div class="home-bestseller-slider" id="bestsellerSlider">
-                            <!-- 슬라이더 아이템들 -->
-                        </div>
-                        <div class="home-slider-controls">
-                            <button class="home-slider-button prev" id="prevBtn">❮</button>
-                            <span class="home-page-info" id="pageInfo"></span>
-                            <button class="home-slider-button next" id="nextBtn">❯</button>
+                        <!-- 슬라이더 (동적 생성) -->
+                        <div class="home-bestseller-slider" id="bestsellerSlider"></div>
+                        <div>
+                            <!-- 슬라이더 컨트롤 -->
+                            <div class="home-slider-controls">
+                                <button class="home-slider-button prev" id="prevBtn">❮</button>
+                                <span class="home-page-info" id="pageInfo">1 / 5</span>
+                                <button class="home-slider-button next" id="nextBtn">❯</button>
+                            </div>
+
+                            <!-- 슬라이드 진행 바 -->
+                            <div class="home-slider-progress">
+                                <div class="home-slider-progress-bar" id="bestsellerProgressBar"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,10 +86,12 @@
 
         <!-- 신작 도서 섹션 -->
         <section class="home-new-release-books container">
+            <!-- 섹션 헤더 -->
             <div class="home-section-header row align-items-center">
                 <div class="col-12 d-flex align-items-center">
                     <div class="d-flex">
                         <h2 class="home-section-title mb-0">신작 도서</h2>
+                        <!-- 신작 도서 카테고리 네비게이션 -->
                         <div class="new-release-category-nav d-flex align-items-center">
                             <span class="home-new-category-item active" data-category-id="1">문학</span>
                             <span class="home-new-category-item" data-category-id="55889">에세이</span>
@@ -91,12 +103,13 @@
                 </div>
             </div>
 
+            <!-- 신작 도서 콘텐츠 영역 -->
             <div class="home-new-release-content row">
                 <div class="col-12">
                     <div class="home-bestseller-slider-wrapper">
-                        <div class="home-bestseller-slider" id="newReleaseSlider">
-                            <!-- 슬라이더 아이템들 -->
-                        </div>
+                        <!-- 신작 슬라이더 (동적 생성) -->
+                        <div class="home-bestseller-slider" id="newReleaseSlider"></div>
+                        <!-- 슬라이더 컨트롤 -->
                         <div class="home-slider-controls">
                             <button class="home-slider-button prev" id="newPrevBtn">❮</button>
                             <span class="home-page-info" id="newPageInfo"></span>
@@ -109,10 +122,12 @@
 
         <!-- 카테고리별 베스트셀러 섹션 -->
         <section class="home-category-bestseller container">
+            <!-- 섹션 헤더 -->
             <div class="home-section-header row align-items-center">
                 <div class="col-12 d-flex align-items-center">
                     <div class="d-flex">
                         <h2 class="home-section-title mb-0">카테고리별 베스트셀러</h2>
+                        <!-- 카테고리 네비게이션 -->
                         <div class="home-category-nav d-flex align-items-center">
                             <span class="home-category-item active" data-category-id="1">문학</span>
                             <span class="home-category-item" data-category-id="55889">에세이</span>
@@ -124,12 +139,13 @@
                 </div>
             </div>
 
+            <!-- 카테고리별 베스트셀러 콘텐츠 영역 -->
             <div class="home-category-bestseller-content row">
                 <div class="col-12">
                     <div class="home-bestseller-slider-wrapper">
-                        <div class="home-bestseller-slider" id="categorySlider">
-                            <!-- 슬라이더 아이템들 -->
-                        </div>
+                        <!-- 카테고리 슬라이더 (동적 생성) -->
+                        <div class="home-bestseller-slider" id="categorySlider"></div>
+                        <!-- 슬라이더 컨트롤 -->
                         <div class="home-slider-controls">
                             <button class="home-slider-button prev" id="catPrevBtn">❮</button>
                             <span class="home-page-info" id="catPageInfo"></span>

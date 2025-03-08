@@ -2,9 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const API_KEY = "ttbssh75202319001";
   let page = 1;
   const pageSize = 20;
-  let totalResults = 0;
   let categorySliderInterval = null;
-  let newReleaseSliderInterval = null; // 신작 도서 슬라이더 전용 인터벌 변수
+  let newReleaseSliderInterval = null;
 
   const categoryMap = {
     전체: 0,
@@ -19,17 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
   initBannerRotation();
 
   // 페이지 로드 시 기본 데이터 불러오기
-  // 베스트셀러(상단 큰 영역: 여러 카테고리 합쳐서 20권)
   fetchBestsellers();
-
-  // 신작 도서(기본 = 전체)
   fetchNewReleasesByCategory(1);
-
-  // 카테고리별 베스트셀러(하단 탭)
   fetchCategoryBestsellers(1);
 
-  // 1) 신작 도서 탭 클릭 이벤트 처리
-  // (신작 도서 영역 내 .home-new-category-item 요소들)
+  // 신작 도서 탭 클릭 이벤트 처리
   const newCategoryTabs = document.querySelectorAll(
     ".new-release-category-nav .home-new-category-item"
   );
@@ -55,8 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 2) 카테고리별 베스트셀러 탭 클릭 이벤트 처리
-  // (카테고리별 베스트셀러 영역 내 .home-category-item 요소들 – HTML에 "전체" 탭 없음)
+  // 카테고리별 베스트셀러 탭 클릭 이벤트 처리
   const categoryTabs = document.querySelectorAll(
     ".home-category-bestseller .home-category-nav .home-category-item"
   );
@@ -96,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     slider.innerHTML = "";
   }
 
-  // 3) 메인 배너 이미지 순환
+  // 메인 배너 이미지 순환
   function initBannerRotation() {
     const images = [
       "./images/banner1.png",
@@ -113,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentIndex = 0;
     const imageElement = document.getElementById("bannerImage");
     const indicatorsContainer = document.getElementById("bannerIndicators");
-    let slideInterval = null; // 인터벌 참조를 저장하기 위한 변수
+    let slideInterval = null;
 
     if (!imageElement || !indicatorsContainer) return;
 
@@ -128,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentIndex !== index) {
           currentIndex = index;
           updateBanner();
-          resetAutoSlide(); // 인디케이터 클릭 시 타이머 재설정
+          resetAutoSlide();
         }
       });
       indicatorsContainer.appendChild(indicator);
@@ -180,12 +172,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       bannerSection.addEventListener("mouseleave", () => {
-        resetAutoSlide(); // 타이머 재설정 함수 사용
+        resetAutoSlide();
       });
     }
   }
 
-  // 4) 베스트셀러 (상단 큰 영역 – 전체 개념: 여러 카테고리 합쳐서 20권)
+  // 베스트셀러 (상단 큰 영역) 데이터 로드
   async function fetchBestsellers() {
     const categories = [1, 55889, 336, 656, 1230];
     const bestsellerBooks = [];
@@ -235,7 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // 5) 카테고리별 베스트셀러 (하단 탭 – 단일 카테고리 조회)
+  // 카테고리별 베스트셀러 (하단 탭) 데이터 로드
   async function fetchCategoryBestsellers(categoryId) {
     const items = await fetchSingleCategoryBestseller(categoryId);
     displayCategoryBooks(items);
@@ -274,19 +266,17 @@ document.addEventListener("DOMContentLoaded", function () {
     return [];
   }
 
-  // 6) 신작 도서 – 카테고리 탭 처리 (전체 포함)
+  // 신작 도서 – 카테고리 탭 처리
   async function fetchNewReleasesByCategory(categoryId) {
-    // 기존 슬라이더 인터벌 먼저 정리
     if (newReleaseSliderInterval) {
       clearInterval(newReleaseSliderInterval);
       newReleaseSliderInterval = null;
     }
 
-    // 슬라이더 초기화
     const slider = document.getElementById("newReleaseSlider");
     if (slider) {
-      slider.innerHTML = ""; // 기존 아이템 제거
-      slider.style.transform = "translateX(0)"; // 위치 초기화
+      slider.innerHTML = "";
+      slider.style.transform = "translateX(0)";
     }
 
     if (categoryId === 0) {
@@ -340,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return [];
   }
 
-  // 7) 공통 API 호출 (JSONP 방식)
+  // API 호출 (JSONP 방식)
   function fetchAladinAPI(url) {
     return new Promise((resolve, reject) => {
       const callbackName =
@@ -361,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 8) 도서 표시 함수들 (베스트셀러, 신작, 카테고리별)
+  // 도서 표시 함수들
   function displayBestsellerBooks(books) {
     const slider = document.getElementById("bestsellerSlider");
     if (!slider) return;
@@ -459,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 9) 오류 메시지 표시 함수
+  // 오류 메시지 표시 함수
   function errorRender(section, errorMessage) {
     const sliderId =
       section === "베스트셀러"
@@ -477,7 +467,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // 10) 슬라이더 초기화 함수들
   // 메인 책 디스플레이 포함한 슬라이더 초기화 함수
   function initFeaturedSlider(
     sliderId,
@@ -494,6 +483,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById(prevBtnId);
     const nextBtn = document.getElementById(nextBtnId);
     const pageInfo = document.getElementById(pageInfoId);
+
+    // 대표책 영역
     const featuredImage = document.getElementById(
       featuredElements.featuredImage
     );
@@ -506,121 +497,144 @@ document.addEventListener("DOMContentLoaded", function () {
     const featuredDescription = document.getElementById(
       featuredElements.featuredDescription
     );
+
+    // 진행 바
+    const progressBar = document.getElementById("bestsellerProgressBar");
+
     if (!slider || sliderItems.length === 0) {
-      console.warn(`슬라이더 요소를 찾을 수 없습니다: ${sliderId}`);
+      console.warn(`슬라이더 요소가 없습니다: ${sliderId}`);
       return;
     }
+
     let currentSlideIndex = 0;
     const totalSlides = sliderItems.length;
     const visibleSlidesCount = calculateVisibleSlidesCount(slider);
     const maxSlideIndex = Math.max(0, totalSlides - visibleSlidesCount);
-    let featuredBookIndex = totalSlides - 1;
-    const bookData = extractBookData(sliderItems);
-    setupInitialFeaturedBook();
+
+    // 자동 슬라이드
     let autoSlideIntervalId = setInterval(() => autoSlide(), autoPlayInterval);
-    setupEventListeners();
-    function extractBookData(items) {
-      return Array.from(items).map((item) => {
-        return {
-          image: item.querySelector("img").src,
-          title: item.querySelector(".home-slider-book-title").textContent,
-          author: item.querySelector(".home-slider-book-author").textContent,
-          description:
-            item.querySelector(".home-slider-book-description")?.textContent ||
-            "",
-        };
+
+    // 초기 대표책 셋업
+    setupInitialFeaturedBook();
+
+    // 이벤트 등록
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        if (currentSlideIndex > 0) {
+          currentSlideIndex--;
+          updateSlider();
+          resetAutoSlide();
+        }
       });
     }
-    function calculateVisibleSlidesCount(slider) {
-      return Math.floor((slider.parentElement.offsetWidth - 40) / (180 + 20));
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        if (currentSlideIndex < maxSlideIndex) {
+          currentSlideIndex++;
+          updateSlider();
+          resetAutoSlide();
+        }
+      });
     }
+    window.addEventListener("resize", () => {
+      const newVisibleSlidesCount = calculateVisibleSlidesCount(slider);
+      const newMaxSlideIndex = Math.max(0, totalSlides - newVisibleSlidesCount);
+      if (currentSlideIndex > newMaxSlideIndex) {
+        currentSlideIndex = newMaxSlideIndex;
+      }
+      updateSlider();
+    });
+
+    // 초기 슬라이드 세팅
+    updateSlider();
+
     function setupInitialFeaturedBook() {
-      const visibleBookIndices = Array.from(
-        { length: visibleSlidesCount },
-        (_, i) => (currentSlideIndex + i) % totalSlides
+      // 첫 슬라이드 아이템을 대표책에 표시
+      const bookData = extractBookData(sliderItems[0]);
+      updateFeaturedBook(bookData);
+    }
+
+    function extractBookData(item) {
+      return {
+        image: item.querySelector("img")?.src,
+        title: item.querySelector(".home-slider-book-title")?.textContent || "",
+        author:
+          item.querySelector(".home-slider-book-author")?.textContent || "",
+        description:
+          item.querySelector(".home-slider-book-description")?.textContent ||
+          "",
+      };
+    }
+
+    function updateFeaturedBook(bookData) {
+      if (!bookData) return;
+      // 페이드 인 효과를 위해 잠시 클래스 제거 후 다시 추가
+      featuredImage.classList.remove("home-fade-in");
+      setTimeout(() => {
+        featuredImage.src = bookData.image;
+        featuredTitle.textContent = bookData.title;
+        featuredAuthor.textContent = bookData.author + " | 역자";
+        featuredDescription.textContent = bookData.description;
+        featuredImage.classList.add("home-fade-in");
+      }, 200);
+    }
+
+    function calculateVisibleSlidesCount(sliderElement) {
+      const itemWidth = 160 + 30;
+      return Math.floor(
+        (sliderElement.parentElement.offsetWidth - 40) / itemWidth
       );
-      for (let i = 0; i < bookData.length; i++) {
-        if (!visibleBookIndices.includes(i % totalSlides)) {
-          featuredBookIndex = i;
-          break;
-        }
-      }
-      if (featuredBookIndex < bookData.length) {
-        updateFeaturedBook(featuredBookIndex);
-      }
     }
-    function setupEventListeners() {
-      if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
-          if (currentSlideIndex > 0) {
-            swapFeaturedBook(currentSlideIndex - 1);
-            currentSlideIndex--;
-            updateSlider();
-            resetAutoSlide();
-          }
-        });
-      }
-      if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-          if (currentSlideIndex < maxSlideIndex) {
-            swapFeaturedBook(currentSlideIndex);
-            currentSlideIndex++;
-            updateSlider();
-            resetAutoSlide();
-          }
-        });
-      }
-      window.addEventListener("resize", () => {
-        const newVisibleSlidesCount = calculateVisibleSlidesCount(slider);
-        const newMaxSlideIndex = Math.max(
-          0,
-          totalSlides - newVisibleSlidesCount
-        );
-        if (currentSlideIndex > newMaxSlideIndex) {
-          currentSlideIndex = newMaxSlideIndex;
-        }
-        updateSlider();
-      });
-    }
+
     function autoSlide() {
       if (currentSlideIndex < maxSlideIndex) {
-        swapFeaturedBook(currentSlideIndex);
         currentSlideIndex++;
-        updateSlider();
       } else {
         currentSlideIndex = 0;
-        updateSlider();
       }
+      updateSlider();
     }
+
     function resetAutoSlide() {
       clearInterval(autoSlideIntervalId);
-      autoSlideIntervalId = setInterval(autoSlide, autoPlayInterval);
+      autoSlideIntervalId = setInterval(() => autoSlide(), autoPlayInterval);
     }
+
     function updateSlider() {
+      // 슬라이더 이동
       const itemWidth = sliderItems[0].offsetWidth + 30;
       slider.style.transition = "transform 0.6s ease";
       slider.style.transform = `translateX(-${
         currentSlideIndex * itemWidth
       }px)`;
+
+      // 대표책 갱신
+      const currentBookData = extractBookData(
+        sliderItems[currentSlideIndex] || sliderItems[0]
+      );
+      updateFeaturedBook(currentBookData);
+
+      // 페이지 정보 갱신
+      updatePageInfo();
+
+      // 진행 바 업데이트
+      updateProgressBar();
     }
-    function updateFeaturedBook(index) {
-      const book = bookData[index];
-      featuredImage.src = book.image;
-      featuredTitle.textContent = book.title;
-      featuredAuthor.textContent = book.author + " | 역자";
-      featuredDescription.textContent = book.description;
+
+    function updatePageInfo() {
+      if (!pageInfo) return;
+      pageInfo.textContent = `${currentSlideIndex + 1} / ${maxSlideIndex + 1}`;
     }
-    function swapFeaturedBook(sliderIndex) {
-      const selectedBookIndex = sliderIndex % totalSlides;
-      featuredImage.classList.remove("home-fade-in");
-      setTimeout(() => {
-        updateFeaturedBook(selectedBookIndex);
-        featuredBookIndex = selectedBookIndex;
-        featuredImage.classList.add("home-fade-in");
-      }, 300);
+
+    function updateProgressBar() {
+      if (!progressBar) return;
+      const progressRatio =
+        maxSlideIndex === 0 ? 1 : currentSlideIndex / maxSlideIndex;
+      progressBar.style.width = `${progressRatio * 100}%`;
     }
   }
 
+  // 무한 슬라이더 초기화 함수
   function initInfiniteSlider(
     sliderId,
     prevBtnId,
@@ -651,6 +665,7 @@ document.addEventListener("DOMContentLoaded", function () {
       categorySliderInterval = autoSlideIntervalId;
     }
     setupEventListeners();
+
     function setupInfiniteSlider() {
       const cloneFirst = Array.from(sliderItems, (item) =>
         item.cloneNode(true)
@@ -668,6 +683,7 @@ document.addEventListener("DOMContentLoaded", function () {
         slider.offsetHeight;
       }, 50);
     }
+
     function setupEventListeners() {
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
@@ -691,6 +707,8 @@ document.addEventListener("DOMContentLoaded", function () {
           resetAutoSlide();
         });
       }
+
+      // 터치 슬라이드 이벤트
       let touchStartX = 0;
       let touchEndX = 0;
       slider.addEventListener(
@@ -708,6 +726,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         { passive: true }
       );
+
       function handleSwipe() {
         if (slider.style.pointerEvents === "none") return;
         const SWIPE_THRESHOLD = 50;
@@ -732,6 +751,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
+
     function slide(direction) {
       if (!slider || sliderItems.length === 0) return;
       const containerHeight = slider.parentElement.offsetHeight;
@@ -781,6 +801,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
+
     function resetAutoSlide() {
       clearInterval(autoSlideIntervalId);
       autoSlideIntervalId = setInterval(() => {
@@ -790,6 +811,7 @@ document.addEventListener("DOMContentLoaded", function () {
         categorySliderInterval = autoSlideIntervalId;
       }
     }
+
     return autoSlideIntervalId;
   }
 });
