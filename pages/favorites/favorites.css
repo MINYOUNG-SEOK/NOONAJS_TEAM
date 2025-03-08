@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+}
+
+body {
+    color: #000;
+    font-size: 1rem;
+    font-family: Pretendard, Noto Sans KR, Malgun Gothic, 맑은고딕, Dotum, 굴림, Gulim, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+button {
+    cursor: pointer;
+}
+
+.fav_container {
+    padding-top: 80px;
+}
+
+.fav_contents {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.fav_book-card {
+    width: 220px;
+}
+
+.fav_book-thum {
+    position: relative;
+    margin: 0 auto;
+    min-height: 200px;
+    max-height: 300px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.fav_book-thum:hover {
+    transform: scale(1.1);
+}
+
+.fav_book-image {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    width: 170px;
+    height: auto;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.fav_book-image:hover {
+    /* transform: scale(1.1); */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fav_button-like {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    border: 0;
+    padding: 0;
+    font-size: 20px;    
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-position: 50% 50%;
+    background-size: 20px;
+    background-color: rgba(224,224,224,.4);
+    color: red;
+}
+
+.fav_button-like:hover {
+    
+}
+
+.fav_blind {
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+}
+
+.fav_book-card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 15px 20px;
+}
+
+.fav_book-card-text .fav_book-title {
+    font-size: 16px;
+    font-weight: 500;
+    /* padding: 15px 20px 10px 25px; */
+    color: #2d2d2d;
+    text-align: center;
+}
+
+.fav_book-card-text .fav_book-author {
+    font-size: 13px;
+    font-weight: 400;
+    color: #767676;
+    text-align: center;
+}
+
+/* 페이지네이션 */
+
+
+/* 팝업 알람창 */
+.fav_system-alert {
+    display: none;
+    position:fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.fav_dim {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #0009;
+}
+
+.fav_system-alert .fav_popup {
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - 2.5rem);
+    max-width: 400px;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+}
+
+.fav_pop-cont {
+    padding: 2rem;
+    text-align: center;
+}
+
+.fav_alert-msg {
+    word-break: keep-all;
+}
+
+.fav_pop-foot {
+    display: flex;
+    justify-content: center;
+}
+
+.fav_pop-foot-button {
+    font-family: inherit;
+    height: 3.25rem;
+    flex: 1;
+    width: 100%;
+    padding: 0 1rem;
+    color: #fff;
+    border-color: #000;
+    background-color: #000;
+    cursor: pointer;
+}
+
+

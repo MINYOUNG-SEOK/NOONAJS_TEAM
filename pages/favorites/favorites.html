@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>책의 온도 - 즐겨찾기</title>
+    <!-- 페이지별 스타일 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="favorites.css">
+</head>
+
+<body>
+    <!-- 메인 콘텐츠만 작성 (헤더와 푸터는 자동 추가됨) -->
+    <main>
+        <div class="fav_container">
+            <section class="fav_contents" id="book-list">
+                <!-- API 데이터가 여기에 표시됨 -->
+            </section>
+        
+            <!-- 페이지네이션 -->
+            <nav aria-label="Page navigation" id="fav_page-box">
+                <ul class="pagination">
+                  <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <!-- 팝업 알람창 -->
+    <div id="systemAlert" class="fav_system-alert" style="display: none;">
+        <div class="fav_dim"></div>
+        <div class="fav_popup">
+            <div class="fav_pop-cont">
+                <p class="fav_alert-msg"></p>
+            </div>
+            <div class="fav_pop-foot">
+                <button class="fav_pop-foot-button">
+                    <span>확인</span>
+                </button>
+                <button class="fav_pop-foot-button">
+                    <span>취소</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- 공통 스크립트는 단 한 번만 추가 -->
+    <script src="/main.js"></script>
+    <script defer src="favorites.js"></script>
+</body>
+
+</html>
