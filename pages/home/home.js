@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchBestsellers();
 
   // 신작 도서(기본 = 전체)
-  fetchNewReleasesByCategory(0);
+  fetchNewReleasesByCategory(1);
 
   // 카테고리별 베스트셀러(하단 탭)
   fetchCategoryBestsellers(1);
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         url.searchParams.set("Cover", "Big");
         const data = await fetchAladinAPI(url);
         if (data && data.item) {
-          const categoryBooks = data.item.slice(0, 4);
+          const categoryBooks = data.item.slice(0, 6);
           bestsellerBooks.push(...categoryBooks);
         }
       } catch (error) {
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
       new Set(bestsellerBooks.map((b) => b.itemId))
     )
       .map((id) => bestsellerBooks.find((b) => b.itemId === id))
-      .slice(0, 20);
+      .slice(0, 30);
     if (uniqueBooks.length > 0) {
       displayBestsellerBooks(uniqueBooks);
       initFeaturedSlider(
@@ -215,6 +215,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 6) 신작 도서 – 카테고리 탭 처리 (전체 포함)
   async function fetchNewReleasesByCategory(categoryId) {
+    // 기존 슬라이더 인터벌 먼저 정리
+    if (newReleaseSliderInterval) {
+      clearInterval(newReleaseSliderInterval);
+      newReleaseSliderInterval = null;
+    }
+
+    // 슬라이더 초기화
+    const slider = document.getElementById("newReleaseSlider");
+    if (slider) {
+      slider.innerHTML = ""; // 기존 아이템 제거
+      slider.style.transform = "translateX(0)"; // 위치 초기화
+    }
+
     if (categoryId === 0) {
       const catIds = [1, 55889, 336, 656, 1230];
       let allItems = [];
@@ -226,32 +239,22 @@ document.addEventListener("DOMContentLoaded", function () {
         .map((id) => allItems.find((b) => b.itemId === id))
         .slice(0, 20);
       displayNewReleaseBooks(unique);
-      setTimeout(() => {
-        newReleaseSliderInterval = initInfiniteSlider(
-          "newReleaseSlider",
-          "newPrevBtn",
-          "newNextBtn",
-          "newPageInfo",
-          3000,
-          "next",
-          false
-        );
-      }, 200);
     } else {
       const items = await fetchSingleCategoryNewRelease(categoryId);
       displayNewReleaseBooks(items);
-      setTimeout(() => {
-        newReleaseSliderInterval = initInfiniteSlider(
-          "newReleaseSlider",
-          "newPrevBtn",
-          "newNextBtn",
-          "newPageInfo",
-          3000,
-          "next",
-          false
-        );
-      }, 200);
     }
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    newReleaseSliderInterval = initInfiniteSlider(
+      "newReleaseSlider",
+      "newPrevBtn",
+      "newNextBtn",
+      "newPageInfo",
+      3000,
+      "next",
+      false
+    );
   }
 
   async function fetchSingleCategoryNewRelease(catId) {
