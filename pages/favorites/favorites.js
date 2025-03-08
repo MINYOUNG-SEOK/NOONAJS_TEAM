@@ -1,29 +1,78 @@
 let likedItemsList = [];
+let filteredItems = [];
+let currentCategory = 'all';
 let totalResults = 0;
 let page = 1;
 const pageSize = 20;
 const groupSize = 5;
 
+const categoryMapping = {
+    '문학' : ['소설/시/희곡'],
+    '에세이' : ['에세이'],
+    '자기계발' : ['자기계발'],
+    '교양' : ['인문학', '사회과학', '역사'],
+    '라이프스타일' : ['요리/살림', '건강/취미', '여행', '가정/요리/뷰티'],
+}
+
+const findExactCategory = (categoryPath, searchTerm) => {
+    // 전체 카테고리
+    if(searchTerm === 'all' || !searchTerm) return true;
+
+    const categories = categoryPath.split('>');
+
+    return categories.some(category => {
+        return categoryMapping[searchTerm].some(subCategory => subCategory === category.trim());
+    });
+}
+
+const categoryButtons = document.querySelectorAll(".fav_category");
+categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+
+        categoryButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        currentCategory = button.dataset.category;
+        page = 1;
+        console.log('current category :', currentCategory);
+        getLikedItems();
+    });
+});
 
 const getLikedItems = () => {
     const likedItems = localStorage.getItem("likedItems");
     likedItemsList = likedItems ? JSON.parse(likedItems) : []; 
-    if(likedItemsList.length > 0) {
-        console.log('likedItem', likedItemsList);
 
-        totalResults = likedItemsList.length;
-        renderLikedItems();
-        renderPagination();
+    if(likedItemsList.length > 0) {
+        // 카테고리 적용
+        filteredItems = likedItemsList;
+
+        if(currentCategory) {
+            filteredItems = likedItemsList.filter(book => {
+                return book.categoryName && findExactCategory(book.categoryName, currentCategory);
+            })
+        }
+
+        totalResults = filteredItems.length;
+
+        if(totalResults > 0) {
+            renderLikedItems();
+        } else {
+            renderEmptyLikedItems()
+        }
     } else {
+        totalResults = 0;
         renderEmptyLikedItems();
     }
+    renderPagination();
 }
 
 const renderLikedItems = () => {
+    
     // 페이지네이션 적용을 위해 시작, 끝 인덱스 추가
     const startIndex = (page - 1) * pageSize;
-    const endIndex = Math.min(startIndex + pageSize, likedItemsList.length);
-    const currentPageItems = likedItemsList.slice(startIndex, endIndex);
+    const endIndex = Math.min(startIndex + pageSize, filteredItems.length);
+    const currentPageItems = filteredItems.slice(startIndex, endIndex);
 
     let booksHTML = currentPageItems.map( book => `
         <div class="fav_book-card">
@@ -46,7 +95,13 @@ const renderLikedItems = () => {
 }
 
 const renderEmptyLikedItems = () => {
-    let booksHTML = '<div class="fav_no-items">좋아하는 도서를 추가해 보세요</div>'
+    let booksHTML = ``;
+
+    if(currentCategory && currentCategory !== 'all') {
+        booksHTML = `<div class="fav_no-items">'${currentCategory}' 카테고리에 해당하는 도서가 없습니다<br/>좋아하는 도서를 추가해 보세요</div>`
+    } else {
+        booksHTML = '<div class="fav_no-items">좋아하는 도서를 추가해 보세요</div>'
+    }
 
     document.getElementById('book-list').innerHTML = booksHTML;
 }
@@ -84,12 +139,17 @@ const renderPagination = () => {
     document.querySelector(".pagination").innerHTML = paginationHTML;
 }
 
+
 const removeLike = (itemId) => {
 
     const index = likedItemsList.findIndex( item => item.itemId === itemId);
     if(index > -1) {
         likedItemsList.splice(index, 1);
         localStorage.setItem('likedItems', JSON.stringify(likedItemsList));
+
+        filteredItems = currentCategory ? likedItemsList.filter(book => {
+            return book.categoryName && findExactCategory(book.categoryName, currentCategory);
+        }) : likedItemsList;
 
         // 총 결과 수 업데이트
         totalResults = likedItemsList.length;
@@ -99,7 +159,11 @@ const removeLike = (itemId) => {
             page = totalPages;
         }
 
-        renderLikedItems();
+        if(totalResults > 0) {
+            renderLikedItems();
+        } else {
+            renderEmptyLikedItems()
+        }
         renderPagination();
     }
 }
@@ -136,4 +200,5 @@ const moveToPage = (pageNum) => {
     renderPagination();
 }
 
+document.querySelector('.fav_category[data-category="all"]').classList.add('active');
 getLikedItems();
