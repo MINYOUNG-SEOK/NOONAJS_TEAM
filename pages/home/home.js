@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const bestsellerBooks = [];
     for (const catId of categories) {
       try {
-        const url = new URL("https://www.aladin.co.kr/ttb/api/ItemList.aspx");
+        const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
         url.searchParams.set("ttbkey", API_KEY);
         url.searchParams.set("QueryType", "Bestseller");
         url.searchParams.set("MaxResults", pageSize);
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchSingleCategoryBestseller(catId) {
     try {
-      const url = new URL("https://www.aladin.co.kr/ttb/api/ItemList.aspx");
+      const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
       url.searchParams.set("ttbkey", API_KEY);
       url.searchParams.set("QueryType", "Bestseller");
       url.searchParams.set("MaxResults", pageSize);
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   async function fetchSingleCategoryNewRelease(catId) {
     try {
-      const url = new URL("https://www.aladin.co.kr/ttb/api/ItemList.aspx");
+      const url = new URL("http://www.aladin.co.kr/ttb/api/ItemList.aspx");
       url.searchParams.set("ttbkey", API_KEY);
       url.searchParams.set("QueryType", "ItemNewAll");
       url.searchParams.set("MaxResults", pageSize);
