@@ -111,6 +111,33 @@ button {
 }
 
 /* 페이지네이션 */
+.fav_page-box {
+    padding: 80px 0;
+}
+
+.pagination {
+    font-size: 17px;
+    color: #767676;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link{
+    border: none;
+    color: #999;
+    cursor: pointer;
+  }
+  
+  .page-link:hover{
+    background-color: #fff;
+    border-color: #F8F3D9;
+    color: #141414;
+  }
+  
+  .active>.page-link, .page-link.active {
+    background-color: #B9B28A;
+    border-color: #B9B28A;
+  }
 
 
 /* 팝업 알람창 */
