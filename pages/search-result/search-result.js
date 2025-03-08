@@ -1,26 +1,26 @@
 async function getSearchResults() {
-  // URL에서 query와 page 값 가져오기
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("query");
-
+  const sortBy = urlParams.get("sort") || "Accuracy";
   let currentPage = parseInt(urlParams.get("page")) || 1;
-  console.log("현재 페이지:", currentPage);
+
+  console.log("현재 페이지:", currentPage, "정렬 기준:", sortBy);
 
   if (!query) {
-    document.querySelector("search-results").innerHTML =
+    document.querySelector("#search-results").innerHTML =
       "<p>검색어가 없습니다.</p>";
     return;
   }
 
   try {
-    // API 요청
     const searchParams = new URLSearchParams();
     searchParams.set("apiType", "ItemSearch");
     searchParams.set("Query", query);
     searchParams.set("QueryType", "Title");
     searchParams.set("MaxResults", "20");
-    searchParams.set("start", currentPage); //start 값 수정
+    searchParams.set("start", currentPage);
     searchParams.set("SearchTarget", "Book");
+    searchParams.set("Sort", sortBy);
 
     const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
     console.log("검색 API 요청 URL:", url);
@@ -28,27 +28,89 @@ async function getSearchResults() {
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log("API 응답 데이터:", data);
-    console.log("응답된 아이템 개수:", data.item ? data.item.length : 0);
-
     if (!data.item || data.item.length === 0) {
       document.getElementById("search-results").innerHTML =
         "<p>검색 결과가 없습니다.</p>";
       return;
     }
 
-    // 기존 검색 결과 초기화
     document.getElementById("search-results").innerHTML = "";
-
-    // 새로운 데이터로 화면 업데이트
     renderResults(data.item);
-
-    // 페이지네이션 업데이트
     paginationRender(data.totalResults, currentPage, query);
   } catch (error) {
     console.error("API 요청 실패:", error);
   }
 }
+
+// 정렬 필터 이벤트 리스너 (데스크탑 + 모바일)
+document.addEventListener("DOMContentLoaded", () => {
+  const navItems = document.querySelectorAll(".sort-options .nav-link");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+
+  function updateActiveSort(selectedSort) {
+    // 데스크탑 정렬 필터 업데이트
+    navItems.forEach((item) => {
+      item.classList.remove("active");
+      if (item.dataset.sort === selectedSort) item.classList.add("active");
+    });
+
+    // 모바일 정렬 필터 업데이트
+    dropdownItems.forEach((item) => {
+      item.classList.remove("active");
+      if (item.dataset.sort === selectedSort) item.classList.add("active");
+    });
+
+    // 드롭다운 버튼에 선택한 정렬 기준 표시
+    document.getElementById("sortDropdown").innerText = document.querySelector(
+      `.dropdown-item[data-sort="${selectedSort}"]`
+    ).innerText;
+  }
+
+  function handleSortClick(event) {
+    event.preventDefault();
+    const selectedSort = event.target.dataset.sort;
+
+    // 정렬 시 page를 1로 리셋
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("sort", selectedSort);
+    urlParams.set("page", "1");
+    window.history.pushState({}, "", `?${urlParams.toString()}`);
+
+    updateActiveSort(selectedSort);
+    getSearchResults();
+  }
+
+  navItems.forEach((item) => item.addEventListener("click", handleSortClick));
+  dropdownItems.forEach((item) =>
+    item.addEventListener("click", handleSortClick)
+  );
+
+  // 드롭다운 버튼 클릭 시 드롭다운 메뉴 보이기
+  document
+    .getElementById("sortDropdown")
+    .addEventListener("click", function (event) {
+      event.stopPropagation();
+      document.getElementById("dropdownMenu").classList.toggle("show");
+    });
+
+  // 클릭 외의 영역을 누르면 드롭다운 닫기
+  window.addEventListener("click", function (event) {
+    if (!event.target.closest(".dropdown")) {
+      document.getElementById("dropdownMenu").classList.remove("show");
+    }
+  });
+});
+
+// 페이지 로드 시 검색 결과 가져오기
+window.onload = function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("query");
+
+  if (query) {
+    getSearchResults();
+    getTopRatedBooks(query);
+  }
+};
 
 // 화질 개선 함수
 async function getHighResCover(url) {
@@ -183,7 +245,6 @@ const moveToPage = (pageNum) => {
 };
 
 //평점 높은 책 추천 슬라이더
-
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("query");

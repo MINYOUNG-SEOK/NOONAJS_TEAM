@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 20px auto;
   padding: 10px;
 }
@@ -182,4 +182,137 @@
 
 .search_best_title {
   font-size: 1.5rem;
+}
+
+/* 정렬 필터 바 */
+
+/* 정렬 필터 바 */
+.header_sort-filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 2px solid #ddd; /* 전체 정렬 바 테두리 */
+  border-radius: 8px; /* 모서리를 둥글게 */
+  padding: 5px 10px; /* 내부 여백 */
+  width: fit-content; /* 내용에 맞게 크기 조절 */
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff; /* 배경색 */
+}
+
+/* 데스크탑 정렬 버튼 */
+.sort-options .nav-link {
+  color: black;
+  font-size: 14px;
+  padding: 10px 15px;
+}
+
+.nav-pills .nav-link.active,
+.sort-options .nav-link.active {
+  background-color: #f8f3d9 !important;
+  color: #333 !important;
+}
+
+.sort-options .nav-link:hover {
+  background-color: #f8f3d9 !important;
+  font-weight: bolder;
+  color: #333;
+}
+
+/* 정렬 옵션 간 구분선 */
+.sort-options .nav-item {
+  position: relative;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.sort-options .nav-item:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bbb;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 모바일 드롭다운 */
+.dropdown {
+  position: relative;
+  text-align: center;
+}
+
+.dropdown-toggle {
+  background-color: white !important;
+  color: #333 !important;
+  border: 1px solid #ccc !important;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+/* 드롭다운 기본적으로 숨김 */
+.dropdown-menu {
+  display: none; /* 🔥 추가 */
+  min-width: 160px;
+  text-align: center;
+  background-color: white !important;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: absolute; /* 부모 요소(.dropdown)를 기준으로 위치 */
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%); /* 🔥 가운데 정렬 */
+  z-index: 1000;
+}
+
+/* 드롭다운이 열릴 때 보이도록 설정 */
+.dropdown-menu.show {
+  display: block; /* 🔥 추가 */
+}
+
+/* 모바일 드롭다운 항목 스타일 */
+.dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdown-item.active,
+.dropdown-item:hover {
+  background-color: #f8f3d9 !important;
+  color: #333 !important;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 모바일에서 가로 정렬 바 숨김 */
+@media (max-width: 768px) {
+  .sort-options {
+    display: none;
+  }
+  .header_sort-filter-bar {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    align-items: center;
+    width: 100%;
+    padding-left: 35px;
+    margin-left: 0;
+    text-align: left;
+  }
+  .dropdown {
+    display: block;
+    width: fit-content;
+    margin-left: 0;
+    text-align: left;
+    margin-left: 0;
+  }
+  .header_sort-filter-bar {
+    border: none;
+  }
 }
