@@ -40,7 +40,7 @@ async function getBookDetail() {
 const renderBookTitleAndCover = () => {
     // 제목
     document.querySelector('.detail_book-title').textContent = bookData.title;
-
+    document.title = `책의 온도 - ${bookData.title}`
     // 부제목
     if(bookData.subInfo.subTitle) {
         document.querySelector('.detail_sub-title').textContent = bookData.subInfo.subTitle;
