@@ -101,3 +101,31 @@ function searchSuggested(keyword) {
 window.onload = function () {
   getEditorSuggestedBook();
 };
+
+// 사이드메뉴 열고 닫기
+const toggleMenu = () => {
+  const sidebar = document.getElementById("sidebar");
+  sidebar.classList.toggle(
+    "open"
+  ); /* class.toggle은 클래스가 없으면 추가를 있으면 제거를 하는 방식 */
+};
+
+window.addEventListener("resize", () => {
+  const sidebar = document.getElementById("sidebar");
+
+  if (window.innerWidth > 768) {
+    sidebar.classList.remove("open");
+  }
+});
+
+/* 카테고리를 클릭 시 사이드바 자동 닫힘 기능 */
+document.addEventListener("click", (event) => {
+  const sidebar = document.getElementById("sidebar");
+
+  if (
+    sidebar.classList.contains("open") &&
+    event.target.closest(".sidebar-menus button")
+  ) {
+    sidebar.classList.remove("open");
+  }
+});
