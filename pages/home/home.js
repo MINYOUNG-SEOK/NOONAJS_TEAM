@@ -112,16 +112,77 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
     let currentIndex = 0;
     const imageElement = document.getElementById("bannerImage");
-    if (!imageElement) return;
-    function changeImage() {
-      currentIndex = (currentIndex + 1) % images.length;
+    const indicatorsContainer = document.getElementById("bannerIndicators");
+    let slideInterval = null; // 인터벌 참조를 저장하기 위한 변수
+
+    if (!imageElement || !indicatorsContainer) return;
+
+    // 인디케이터 생성
+    images.forEach((_, index) => {
+      const indicator = document.createElement("div");
+      indicator.className = `home-banner-indicator ${
+        index === 0 ? "active" : ""
+      }`;
+      indicator.setAttribute("data-index", index);
+      indicator.addEventListener("click", () => {
+        if (currentIndex !== index) {
+          currentIndex = index;
+          updateBanner();
+          resetAutoSlide(); // 인디케이터 클릭 시 타이머 재설정
+        }
+      });
+      indicatorsContainer.appendChild(indicator);
+    });
+
+    // 배너 업데이트 함수
+    function updateBanner() {
+      // 인디케이터 업데이트
+      const indicators = document.querySelectorAll(".home-banner-indicator");
+      indicators.forEach((ind, idx) => {
+        if (idx === currentIndex) {
+          ind.classList.add("active");
+        } else {
+          ind.classList.remove("active");
+        }
+      });
+
+      // 이미지 업데이트
       imageElement.classList.remove("home-fade-in");
       setTimeout(() => {
         imageElement.src = images[currentIndex];
         imageElement.classList.add("home-fade-in");
       }, 300);
     }
-    setInterval(changeImage, 4000);
+
+    // 자동 슬라이드
+    function changeImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateBanner();
+    }
+
+    // 타이머 재설정 함수
+    function resetAutoSlide() {
+      if (slideInterval) {
+        clearInterval(slideInterval);
+      }
+      slideInterval = setInterval(changeImage, 3000);
+    }
+
+    // 초기 타이머 설정
+    resetAutoSlide();
+
+    // 배너에 마우스 오버시 자동 슬라이드 일시 정지
+    const bannerSection = document.querySelector(".home-banner");
+    if (bannerSection) {
+      bannerSection.addEventListener("mouseenter", () => {
+        clearInterval(slideInterval);
+        slideInterval = null;
+      });
+
+      bannerSection.addEventListener("mouseleave", () => {
+        resetAutoSlide(); // 타이머 재설정 함수 사용
+      });
+    }
   }
 
   // 4) 베스트셀러 (상단 큰 영역 – 전체 개념: 여러 카테고리 합쳐서 20권)
