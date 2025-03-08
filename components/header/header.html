@@ -3,38 +3,35 @@
     <!-- 로고 타이틀 -->
     <a href="/pages/home/home.html" class="logo-title">
       <img src="/assets/Preview.png" />
-    </a>    
+    </a>
     <!-- 카테고리 메뉴 버튼 -->
     <div class="header_menus">
       <div class="header_menu-item">
-        <button>문학</button>
-        <div class="header_dropdown-menu">
-          <button>소설</button>
-          <button>시</button>
-          <button>희곡</button>
-        </div>
+        <button onclick="navigateToCategory('문학')">문학</button>
       </div>
-      <button>에세이</button>
-      <button>자기계발</button>
+      <button onclick="navigateToCategory('에세이')">에세이</button>
+      <button onclick="navigateToCategory('자기계발')">자기계발</button>
       <div class="header_menu-item">
         <button>교양</button>
         <div class="header_dropdown-menu">
-          <button>인문학</button>
-          <button>사회과학</button>
-          <button>역사</button>
+          <button onclick="navigateToCategory('인문학')">인문학</button>
+          <button onclick="navigateToCategory('사회과학')">사회과학</button>
+          <button onclick="navigateToCategory('역사')">역사</button>
         </div>
       </div>
       <div class="header_menu-item">
         <button>라이프 스타일</button>
         <div class="header_dropdown-menu">
-          <button>요림/살림</button>
-          <button>여행</button>
+          <button onclick="navigateToCategory('가정/요리/뷰티')">
+            가정/요리/뷰티
+          </button>
+          <button onclick="navigateToCategory('여행')">여행</button>
         </div>
       </div>
     </div>
     <!-- nav 오른쪽 요소들 -->
     <div class="nav-right">
-       <!-- 모바일 사이드바 아이콘 -->
+      <!-- 모바일 사이드바 아이콘 -->
       <button class="side-icon" onclick="toggleMenu()">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -72,23 +69,34 @@
           ></button>
         </div>
         <!-- 오늘의 편집자 추천 책 -->
-         <div class="header_suggestedBook_title" id="header_suggestedBook_title">
+        <div class="header_suggestedBook_title" id="header_suggestedBook_title">
           <strong>오늘의 추천 책: </strong>
-         </div>
+        </div>
         <button class="closeBtn" onclick="closeSearch()">&times;</button>
       </div>
+    </div>
 
     <!-- 사이드바 (모바일용) -->
     <div id="sidebar" class="sidebar">
       <button class="sideBar_close-btn" onclick="toggleMenu()">×</button>
       <div class="sidebar-menus">
-        <button>문학</button>
-        <button>에세이</button>
-        <button>자기계발</button>
+        <button onclick="navigateToCategory('문학')">문학</button>
+        <button onclick="navigateToCategory('에세이')">에세이</button>
+        <button onclick="navigateToCategory('자기계발')">자기계발</button>
         <button>교양</button>
+        <div class="sidebar-submenu">
+          <button onclick="navigateToCategory('인문학')">인문학</button>
+          <button onclick="navigateToCategory('사회과학')">사회과학</button>
+          <button onclick="navigateToCategory('역사')">역사</button>
+        </div>
         <button>라이프스타일</button>
+        <div class="sidebar-submenu">
+          <button onclick="navigateToCategory('가정/요리/뷰티')">
+            가정/요리/뷰티
+          </button>
+          <button onclick="navigateToCategory('여행')">여행</button>
+        </div>
       </div>
     </div>
-
   </nav>
 </header>
