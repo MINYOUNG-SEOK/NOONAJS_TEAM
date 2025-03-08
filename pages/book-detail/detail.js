@@ -86,6 +86,7 @@ const renderBookSummary = () => {
         btnImg.classList.remove('fa-heart-o');
         btnImg.classList.add('fa-heart');
         likeButton.classList.add('active');
+        document.querySelector('.detail_button-like>span').textContent = "찜 해제";
     }
 };
 
@@ -182,18 +183,21 @@ const toggleLike = () => {
     const index = likedItems.findIndex( item => item.itemId === bookData.itemId );
 
     const btnImg = document.querySelector('.detail_button-like>i');
+    const btnSpan = document.querySelector('.detail_button-like>span');
     if(index === -1) {
         likedItems.push(bookData);
         likeButton.classList.add('active');
 
         btnImg.classList.remove('fa-heart-o');
         btnImg.classList.add('fa-heart');
+        btnSpan.textContent = '찜 해제';
     } else {
         likedItems.splice(index, 1);
         likeButton.classList.remove('active');
 
         btnImg.classList.remove('fa-heart');
         btnImg.classList.add('fa-heart-o');
+        btnSpan.textContent = '찜하기';
     }
 
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
