@@ -1,34 +1,5 @@
 /* 검색 결과 이미지 카드 영역*/
-.search-result {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 10px;
-}
-
-.search_book-card {
-  background: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-.search_book-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-.search_book-card h3 {
-  margin: 10px 0 5px;
-  font-size: 16px;
-}
-.search_book-card p {
-  color: #666;
-  font-size: 14px;
-}
+/* 카테고리 페이지랑 통일함*/
 
 /* 페이지네이션 css */
 .search-result_page {
@@ -125,66 +96,98 @@
   margin-bottom: 70px;
 }
 
-.header_top-rated-slider {
-  width: 100%;
-  padding: 10px;
-  display: block !important;
+.search_best_title {
+  margin-bottom: 30px;
 }
 
 .header_top-rated-book {
+  position: relative;
   text-align: center;
-  padding: 10px;
+  padding: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  width: 140px;
+  height: 200px;
+  border: 2px solid #ddd;
+}
+
+.header_top-rated-slider {
+  border: 3px solid #bcb58c;
+  border-radius: 5px;
+  padding: 8px;
 }
 
 .header_top-rated-book img {
-  width: 120px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header_top-rated-book:hover img {
+  transform: scale(1.05);
 }
 
 .header_top-rated-book h3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
   font-size: 14px;
-  margin-top: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Slick 슬라이드 좌우 버튼 기본 스타일 */
+.header_top-rated-book:hover h3 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slick-slide {
+  margin: 0 5px;
+}
+
 .slick-prev:before,
 .slick-next:before {
-  color: black !important; /* 버튼 아이콘 색상을 검정으로 강제 적용 */
+  color: rgba(
+    94,
+    94,
+    94,
+    0.8
+  ) !important; /* 버튼 아이콘 색상을 검정으로 강제 적용 */
   font-size: 24px !important; /* 버튼 아이콘 크기 */
   opacity: 1 !important; /* 기본값이 0.25라서 1로 변경 */
 }
-
-/* Slick 슬라이드 좌우 버튼 스타일 */
 .slick-prev,
 .slick-next {
-  background: rgba(255, 255, 255, 0.8); /* 버튼 배경 (반투명) */
-  border-radius: 50%; /* 원형 버튼 */
-  width: 40px;
-  height: 40px;
+  position: static !important;
+  background: rgba(94, 94, 94, 0.8);
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+  font-size: 24px !important;
+  color: white !important;
+  cursor: pointer;
+  margin: 0 15px;
+}
+
+.title-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-}
-
-/* 위치 조정 */
-.slick-prev {
-  left: -45px; /* 왼쪽으로 이동 */
-}
-.slick-next {
-  right: -45px; /* 오른쪽으로 이동 */
+  gap: 15px; /* 버튼과 타이틀 사이 간격 */
+  margin-bottom: 15px;
 }
 
 .search_best_title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
-
-/* 정렬 필터 바 */
 
 /* 정렬 필터 바 */
 .header_sort-filter-bar {
@@ -314,5 +317,12 @@
   }
   .header_sort-filter-bar {
     border: none;
+  }
+}
+
+@media (max-width: 940px) {
+  .header_top-rated-book {
+    width: 120px;
+    height: 180px;
   }
 }

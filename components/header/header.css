@@ -16,7 +16,7 @@
 .logo-title {
   text-decoration: none;
   margin-left: 30px;
-  margin-right: 60px;
+  margin-right: 50px;
 }
 
 .logo-title img {
@@ -58,6 +58,7 @@
 
 .header_menu-item:hover .header_dropdown-menu {
   display: block;
+  z-index: 1300;
 }
 
 .header_menus button {
@@ -74,6 +75,13 @@
 }
 
 /* navbar 오른쪽 아이콘들 */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto; /* 오른쪽 정렬 */
+}
+
 .nav-right button {
   border: none;
   background: transparent;
@@ -81,13 +89,19 @@
 }
 
 .header_search-icon {
+  order: 0; /* side-icon보다 오른쪽에 배치 */
+}
+
+.header_search-icon {
   margin-left: auto;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .side-icon {
   margin: 7px;
   display: none;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .header_search-icon i {
@@ -112,6 +126,8 @@
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
   border-radius: 0 0 10px 10px;
+
+  overflow: hidden;
 }
 
 /* 왼쪽 상단 로고 */
@@ -120,6 +136,11 @@
   top: 10px;
   left: 20px;
   width: 80px;
+}
+
+.search-box-logo .logo-title img {
+  position: relative;
+  z-index: 5;
 }
 
 .header_search-box.active {
@@ -137,10 +158,14 @@
 }
 
 .inner-search {
+  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
+  z-index: 10;
+  position: relative;
 }
+
 .inner-search input {
   width: 100%;
   padding: 10px;
@@ -149,13 +174,7 @@
   border-bottom: 2px solid #333;
   outline: none;
 }
-.icon-button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #333;
-}
+
 .closeBtn {
   background: none;
   border: none;
@@ -171,13 +190,13 @@
 .inner-search input:-webkit-autofill:hover,
 .inner-search input:-webkit-autofill:focus {
   background: none !important;
-  box-shadow: 0 0 0px 1000px white inset !important; /* 강제로 배경색을 흰색으로 덮기 */
-  -webkit-text-fill-color: #333 !important; /* 글씨 색 유지 */
+  box-shadow: 0 0 0px 1000px inset transparent !important; /* 강제로 배경색을 흰색으로 덮기 */
+  -webkit-text-fill-color: #333 !important ; /* 글씨 색 유지 */
   transition: background-color 5000s ease-in-out 0s; /* 배경색 변화 방지 */
 }
 
 .header_herat-icon {
-  margin-right: 60px;
+  margin-right: 30px;
 }
 
 .header_herat-icon i {
@@ -185,39 +204,16 @@
   color: #333;
 }
 
-.menu-custom-card {
-  background-color: #f4f5f6;
-  border: none;
-  padding: 10px;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  border-radius: 0;
-}
-
-.menu-custom-card-img {
-  width: 138px;
-  height: 226px;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
-}
-
-.menu-title {
-  color: #000000;
-  font-size: 13px;
-  padding: 5px 0px;
-}
-
-.menu-ice {
-  color: #000000;
-  font-size: 11px;
-}
+/* 블로거 추천 책 타이틀 키워드 */
 
 .header_suggestedBook_title {
   text-align: center;
   margin: 10px 0;
+  width: 100%;
+}
+
+.todays-suggested-book {
+  font-size: 1rem;
 }
 
 .suggested-keyword {
@@ -230,6 +226,7 @@
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s;
+  font-size: 0.9rem;
 }
 
 .suggested-keyword:hover {
@@ -243,10 +240,11 @@
   position: fixed;
   top: 0;
   left: -260px;
-  background-color: #f8f3d9;
+  background-color: #ebe5c2;
   transition: left 0.3s ease-in-out;
   padding-top: 20px;
   overflow: hidden;
+  z-index: 1100;
 }
 
 .sidebar.open {
@@ -264,37 +262,81 @@
   color: #333;
   text-align: left;
   margin-top: 15px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .sidebar-menus button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.sidebar-menus button:active {
+  background-color: #f8f3d9;
   font-weight: bolder;
 }
 
-.close-btn {
-  font-size: 24px;
+.sidebar-submenu button {
+  width: 100%;
+  padding: 8px;
   background: none;
   border: none;
-  color: white;
+  text-align: left;
+  font-size: 0.9rem; /* 크기를 조금 줄여서 하위 메뉴 느낌 */
+  color: #444;
+  cursor: pointer;
+  font-weight: lighter;
+  padding-left: 15px;
+}
+
+.sidebar-submenu :hover {
+  background-color: #e7e0be; /* 마우스 올렸을 때 약간 강조 */
+}
+
+.sideBar_close-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #333;
   position: absolute;
   top: 10px;
   right: 15px;
+  left: auto;
   cursor: pointer;
 }
 
-.close-btn:active {
+.close-btn:hover {
   font-weight: bolder;
 }
 
 /* 모바일 반응형 사이드 메뉴바 */
+@media (max-width: 820px) {
+  .header_menus button {
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 768px) {
   .header_menus {
     display: none; /* 기존 메뉴 숨기기 */
   }
   .side-icon {
     display: block; /* 햄버거 버튼 보이기 */
+  }
+}
+
+@media (max-width: 472px) {
+  .nav-right i {
+    font-size: 1rem;
+  }
+  .nav-right {
+    gap: 7px;
+  }
+  .header_search-icon {
+    margin-right: 3px;
+  }
+
+  .logo-title img {
+    width: 80px;
+    height: 60px;
+  }
+  .suggested-keyword {
+    font-size: 0.8rem;
+    font-weight: bold;
   }
 }
