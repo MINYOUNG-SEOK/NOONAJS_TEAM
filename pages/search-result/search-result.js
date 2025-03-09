@@ -167,19 +167,12 @@ function paginationRender(totalResults, currentPage, query) {
   let paginationHTML = "";
 
   // 처음 페이지 버튼
-  paginationHTML += `
-    <li class="${currentPage === 1 ? "disabled" : ""}">
-      <a class="first" onclick="moveToPage(1)">처음 페이지;</a>
-    </li>`;
-
-  // 이전 페이지 버튼
-  paginationHTML += `
-    <li class="${currentPage === 1 ? "disabled" : ""}">
-      <a class="arrow-left" onclick="moveToPage(${Math.max(
-        1,
-        currentPage - 1
-      )})">&lt;</a>
-    </li>`;
+  if (currentPage > 1) {
+    paginationHTML = `<li class="category-page-item" onclick="moveToPage(1)"><a class="category-page-link"href="#top">«</a></li>
+        <li class="category-page-item" onclick="moveToPage(${
+          currentPage - 1
+        })"><a class="category-page-link"href="#top">‹</a></li>`;
+  }
 
   // 페이지 번호
   for (let i = firstPage; i <= lastPage; i++) {
@@ -192,19 +185,11 @@ function paginationRender(totalResults, currentPage, query) {
   }
 
   // 다음 페이지 버튼
-  paginationHTML += `
-    <li class="${currentPage === totalPage ? "disabled" : ""}">
-      <a class="arrow-right" onclick="moveToPage(${Math.min(
-        totalPage,
-        currentPage + 1
-      )})">&gt;</a>
-    </li>`;
-
-  // 끝 페이지 버튼
-  paginationHTML += `
-    <li class="${currentPage === totalPage ? "disabled" : ""}">
-      <a class="last" onclick="moveToPage(${totalPage})">끝 페이지</a>
-    </li>`;
+  if (currentPage < totalPage) {
+    paginationHTML += `<li class="category-page-item" onclick="moveToPage(${
+      currentPage + 1
+    })"><a class="category-page-link"href="#top">›</a></li><li class="category-page-item" onclick="moveToPage(${totalPage})"><a class="category-page-link" href="#top">»</a></li>`;
+  }
 
   document.querySelector(".search-result_pagination").innerHTML =
     paginationHTML;
@@ -310,26 +295,49 @@ function renderTopRatedSlider(books) {
       slidesToScroll: 2,
       autoplay: true,
       autoplaySpeed: 3000,
-      dots: true,
-      arrows: true,
-      prevArrow: '<button type="button" class="slick-prev">&lt;</button>', // 이전 버튼 스타일
-      nextArrow: '<button type="button" class="slick-next">&gt;</button>', // 다음 버튼 스타일
+      dots: false,
+      arrows: false,
+      prevArrow: $(".slick-prev"), // ✅ 직접 만든 버튼 연결
+      nextArrow: $(".slick-next"), // ✅ 직접 만든 버튼 연결
       responsive: [
+        {
+          breakpoint: 950,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 2,
+          },
+        },
         {
           breakpoint: 768,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 3,
             slidesToScroll: 1,
           },
         },
         {
           breakpoint: 480,
           settings: {
-            slidesToShow: 1,
+            slidesToShow: 2,
             slidesToScroll: 1,
           },
         },
       ],
     });
+
+    // 🔥 버튼이 사라지지 않도록 .hide() 삭제!
+    $(".slick-prev, .slick-next").show();
+
+    // 🔥 직접 만든 버튼을 클릭하면 슬라이드가 동작하도록 설정
+    document.querySelector(".slick-prev").addEventListener("click", () => {
+      $slider.slick("slickPrev");
+    });
+
+    document.querySelector(".slick-next").addEventListener("click", () => {
+      $slider.slick("slickNext");
+    });
   }, 500);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  getEditorSuggestedBook();
+});
