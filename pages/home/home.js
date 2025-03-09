@@ -499,7 +499,9 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     // 진행 바
-    const progressBar = document.getElementById("bestsellerProgressBar");
+    const progressBar = document.querySelector(
+      ".home-slider-controls-special #bestsellerProgressBar"
+    );
 
     if (!slider || sliderItems.length === 0) {
       console.warn(`슬라이더 요소가 없습니다: ${sliderId}`);
@@ -623,7 +625,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function updatePageInfo() {
       if (!pageInfo) return;
-      pageInfo.textContent = `${currentSlideIndex + 1} / ${maxSlideIndex + 1}`;
+      const current = currentSlideIndex + 1;
+      const total = maxSlideIndex + 1;
+
+      pageInfo.innerHTML = `
+        <span class="current-page">${current}</span>
+        <span class="page-separator"> ・ </span>
+        <span class="total-page">${total}</span>`;
     }
 
     function updateProgressBar() {

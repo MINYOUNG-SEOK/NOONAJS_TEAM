@@ -39,7 +39,7 @@
             </div>
 
             <!-- 베스트셀러 콘텐츠 영역 -->
-            <div class="home-bestseller-content row">
+            <div class="home-bestseller-content row align-items-center">
                 <!-- 대표 도서 표시 영역 (좌측) -->
                 <div class="home-featured-book col-12 col-lg-5">
                     <div class="home-featured-book-container">
@@ -68,16 +68,18 @@
                         <div class="home-bestseller-slider" id="bestsellerSlider"></div>
                         <div>
                             <!-- 슬라이더 컨트롤 -->
-                            <div class="home-slider-controls">
-                                <button class="home-slider-button prev" id="prevBtn">❮</button>
-                                <span class="home-page-info" id="pageInfo">1 / 5</span>
-                                <button class="home-slider-button next" id="nextBtn">❯</button>
+                            <div class="home-slider-controls-special">
+                                <button class="home-slider-button-special prev" id="prevBtn">❮</button>
+                                <span class="home-page-info" id="pageInfo"></span>
+                                <button class="home-slider-button-special next" id="nextBtn">❯</button>
+
+                                <div class="home-slider-progress">
+                                    <div class="home-slider-progress-bar" id="bestsellerProgressBar"></div>
+                                </div>
                             </div>
 
                             <!-- 슬라이드 진행 바 -->
-                            <div class="home-slider-progress">
-                                <div class="home-slider-progress-bar" id="bestsellerProgressBar"></div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -112,7 +114,6 @@
                         <!-- 슬라이더 컨트롤 -->
                         <div class="home-slider-controls">
                             <button class="home-slider-button prev" id="newPrevBtn">❮</button>
-                            <span class="home-page-info" id="newPageInfo"></span>
                             <button class="home-slider-button next" id="newNextBtn">❯</button>
                         </div>
                     </div>
@@ -148,7 +149,6 @@
                         <!-- 슬라이더 컨트롤 -->
                         <div class="home-slider-controls">
                             <button class="home-slider-button prev" id="catPrevBtn">❮</button>
-                            <span class="home-page-info" id="catPageInfo"></span>
                             <button class="home-slider-button next" id="catNextBtn">❯</button>
                         </div>
                     </div>

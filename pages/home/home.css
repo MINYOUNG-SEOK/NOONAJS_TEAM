@@ -270,36 +270,44 @@
     pointer-events: none;
 }
 
-.home-bestseller-section .home-slider-controls {
+.home-slider-controls-special {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
     display: flex;
     align-items: center;
+    gap: 10px;
     justify-content: center;
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    width: 100%;
     pointer-events: none;
     z-index: 5;
 }
 
-.home-page-info {
-    font-size: 0.9rem;
-    color: #fff;
-    pointer-events: auto;
-    margin: 0 10px;
+.current-page {
+    color: #333;
 }
 
+.total-page {
+    color: #ddd;
+}
+
+.page-separator {
+    color: #333;
+}
+
+
 .home-slider-progress {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 100%;
+    pointer-events: auto;
+    flex: 1;
     height: 4px;
     background-color: #ddd;
-    z-index: 5;
+    position: relative;
 }
 
 .home-slider-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 0%;
     height: 100%;
     background-color: #666;
@@ -321,9 +329,9 @@
     z-index: 5;
 }
 
-.home-bestseller-section .home-slider-button {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+.home-slider-button-special {
+    background: none;
+    color: #333;
     border: none;
     width: 40px;
     height: 40px;
@@ -464,5 +472,10 @@
 
     .home-book-item {
         flex: 0 0 100%;
+    }
+
+    .home-slider-button-special,
+    .home-page-info {
+        display: none;
     }
 }
