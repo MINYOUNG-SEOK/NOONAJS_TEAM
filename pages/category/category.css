@@ -1,12 +1,23 @@
 /* F8F3D9 EBE5C2 B9B28A 504B38 */
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 *{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
+body {
+  font-family: 'Pretendard-Regular';
+}
 
-.category-nav {
-margin-top: 50px;
+/* .category-nav {
+margin-top: 80px;
 text-align: center;
 }
 
@@ -26,9 +37,10 @@ background-color: #ffe8a9;
 
 #category-container{
 width: 100%;
-}
+} */
 
 #book-list {
+padding: 100px 0  50px;
 display: grid;
 grid-template-columns: repeat(5, 1fr);
 justify-content: center;
@@ -60,8 +72,9 @@ transform: scale(1.05);
 }
 
 #book-list .categories-title {
+  font-family: 'Pretendard-Regular';
 font-size: 18px;
-font-weight: 500;
+font-weight: 550;
 width: 170px;
 padding: 15px 5px 0px 5px;
 color: #2d2d2d;
@@ -76,6 +89,7 @@ display: -webkit-box;
 }
 
 #book-list .categories-author{
+font-family: 'Pretendard-Regular';
 font-size: 16px;
 font-weight: 400; 
 width: 170px;
@@ -174,6 +188,8 @@ padding-left: 4px;
 @media all and (min-width:1000px) and (max-width:1279px) { 
 
 #book-list {
+/* border: 1px solid rgb(64, 64, 10); */
+padding: 70px 0  50px;
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 justify-content: center;
@@ -231,6 +247,7 @@ font-size: 16px;
 @media all and (min-width:660px) and (max-width:999px) { 
 
 #book-list {
+padding: 50px 0  40px;
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 justify-content: center;
@@ -287,6 +304,7 @@ font-size: 16px;
 @media all and (min-width:480px) and (max-width:659px) { 
 
 #book-list {
+padding: 40px 0  30px;
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 justify-content: center;
@@ -345,6 +363,7 @@ font-size: 16px;
 @media all and (min-width:300px) and (max-width:479px) { 
 
 #book-list {
+padding: 40px 0  20px;
 display: grid;
 grid-template-columns: repeat(2, 1fr);
 justify-content: center;
