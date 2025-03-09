@@ -38,12 +38,13 @@ async function getBookDetail() {
 
 // 제목 정보 및 이미지 출력
 const renderBookTitleAndCover = () => {
+    console.log('data', bookData);
     // 제목
-    document.querySelector('.detail_book-title').textContent = bookData.title;
+    document.querySelector('.detail_book-title').innerHTML = bookData.title;
     document.title = `책의 온도 - ${bookData.title}`
     // 부제목
     if(bookData.subInfo.subTitle) {
-        document.querySelector('.detail_sub-title').textContent = bookData.subInfo.subTitle;
+        document.querySelector('.detail_sub-title').innerHTML = bookData.subInfo.subTitle;
     }
 
     // 이미지
@@ -102,17 +103,17 @@ const renderBasicInfos = () => {
         // 0-545-01022-5
         isbn = `${isbn.substring(0,1)}-${isbn.substring(1,4)}-${isbn.substring(4,9)}-${isbn.substring(9)}`;
     }
-    document.getElementById('detail_isbn').textContent = isbn;
+    document.getElementById('detail_isbn').innerHTML = isbn;
 
     // category
-    document.getElementById('detail_category').textContent = bookData.categoryName;
+    document.getElementById('detail_category').innerHTML = bookData.categoryName;
     // 정가
-    document.getElementById('detail_price').textContent = bookData.priceStandard.toLocaleString('ko-KR');
+    document.getElementById('detail_price').innerHTML = bookData.priceStandard.toLocaleString('ko-KR');
     // 구매링크
     document.querySelector('.detail_buy-link a').href= bookData.link;
 
     // 도서소개
-    document.getElementById('detail_description').textContent = bookData.description;
+    document.getElementById('detail_description').innerHTML = bookData.description;
 }
 
 const openPopup = (message, type) => {
@@ -161,8 +162,8 @@ const renderRating = () => {
         }
 
         document.getElementById('detail_rating-stars').innerHTML = starsHTML;
-        document.querySelector('.detail_rating-text').textContent = ratingInfo.ratingScore;
-        document.getElementById('detail_rating-count').textContent = `(${ratingInfo.ratingCount}건)`;
+        document.querySelector('.detail_rating-text').innerHTML = ratingInfo.ratingScore;
+        document.getElementById('detail_rating-count').innerHTML = `(${ratingInfo.ratingCount}건)`;
     }
 }
 

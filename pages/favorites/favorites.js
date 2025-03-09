@@ -121,21 +121,21 @@ const renderPagination = () => {
 
     //  처음 페이지 (`«`) 버튼 (첫 페이지에서는 숨김)
     if (page > 1) {
-        paginationHTML = `<li class="page-item" onclick="moveToPage(1)">
-                            <a class="page-link">«</a></li>
-        <li class="page-item" onclick="moveToPage(${page - 1})">
-                            <a class="page-link">‹</a></li>`;
+        paginationHTML = `<li class="fav_page-item" onclick="moveToPage(1)">
+                            <a class="fav_page-link">«</a></li>
+        <li class="fav_page-item" onclick="moveToPage(${page - 1})">
+                            <a class="fav_page-link">‹</a></li>`;
     }
 
     for (let i = firstPage; i <= lastPage; i++) {
-        paginationHTML += `<li class="page-item ${i === page ? 'active' : ''}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+        paginationHTML += `<li class="fav_page-item ${i === page ? 'active' : ''}" onclick="moveToPage(${i})"><a class="fav_page-link">${i}</a></li>`;
     }
 
     //  다음 페이지 (`›`) 버튼 (마지막 페이지에서는 숨김)
     if (page < totalPages) {
-        paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})">
-                            <a class="page-link">›</a></li><li class="page-item" onclick="moveToPage(${totalPages})">
-                            <a class="page-link">»</a></li>`;
+        paginationHTML += `<li class="fav_page-item" onclick="moveToPage(${page + 1})">
+                            <a class="fav_page-link">›</a></li><li class="fav_page-item" onclick="moveToPage(${totalPages})">
+                            <a class="fav_page-link">»</a></li>`;
     }
 
     
