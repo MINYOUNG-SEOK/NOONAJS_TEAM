@@ -498,8 +498,22 @@ main.container-fluid {
 
     .home-slider-button-special,
     .home-page-info {
-        display: none;
+        width: auto;
+        font-size: 13px;
+        margin: 0;
     }
+
+    .home-page-info {
+        max-width: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .home-slider-button-special {
+        width: 30px;
+        height: 30px;
+    }
+
 
     .home-bestseller-section {
         width: 100%;
