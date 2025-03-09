@@ -652,12 +652,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePageInfo() {
       if (!pageInfo) return;
       const current = currentSlideIndex + 1;
-      const total = maxSlideIndex + 1;
 
       pageInfo.innerHTML = `
         <span class="current-page">${current}</span>
         <span class="page-separator"> ・ </span>
-        <span class="total-page">${total}</span>`;
+        <span class="total-page">30</span>`;
     }
 
     function updateProgressBar() {
