@@ -89,6 +89,7 @@ const renderLikedItems = () => {
             <div class="fav_book-card-text">
                 <h3 class="fav_book-title">${book.title}</h3>
                 <p class="fav_book-author">${book.author}</p>
+                <div class="fav_book-desc">${book.description}</div>
             </div>
         </div>
     `).join('');
