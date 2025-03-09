@@ -1,12 +1,234 @@
-  .fixed-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 10px 0;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-  }
+/* F8F3D9 EBE5C2 B9B28A 504B38 */
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+a{
+text-decoration: none;
+color: #fff;
+}
+ul{
+list-style: none; 
+padding: 0;
+}
+
+.fixed-footer {
+background: #504B38;
+width: 100%;
+color: white;
+box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+z-index: 1000;
+}
+
+.footer-inner{
+padding: 10px 0 30px;
+width: 80%;
+margin: 0 auto;
+height: auto;
+overflow: hidden;
+}
+/* 왼/오 박스 */
+.footer-left{
+float: left;
+}
+.footer-right{
+float: right;
+text-align: right;
+}
+.footer-logo{
+margin-bottom: 0;
+}
+
+.footer-logo>img{
+width: 75px;
+}
+/* 정책 css */
+.footer-policy{
+display: flex;
+}
+
+.footer-policy>li::after {
+padding: 0 15px;
+content:"|";
+color: #7e7e7e;
+}
+
+.footer-policy>li:last-child::after {
+content:none;
+}
+
+.footer-policy>li>a {
+font-size: 14px;
+font-weight: 400;
+}
+
+/* 이메일, 운영시간 등 css */
+.footer-links{
+font-size: 14px;
+padding-top: 10px;
+}
+
+.footer-links li:nth-child(1){
+float: left;
+margin-right: 20px;
+}
+
+/* 하단 멘트css */
+.footer-bottom>p{
+font-size: 14px;
+font-weight: 300;
+margin: 0;
+}
+
+/* 오른쪽 sns */
+.footer-sns{
+padding: 15px 0;
+}
+.footer-sns>a>i{
+font-size: 24px;
+margin-right: 10px;
+}
+
+.footer-sns>a:last-child>i{
+margin-right: 0;
+}
+
+
+
+@media all and (min-width:500px) and (max-width:999px) { 
+
+.footer-inner{
+padding: 10px 0 20px;
+width: 100%;
+text-align: center;
+}
+/* 왼/오 박스 */
+.footer-left{
+float: none;
+}
+.footer-right{
+float: none;
+text-align: center;
+padding-top: 10px;
+}
+
+.footer-logo>img{
+width: 75px;
+}
+/* 정책 css */
+.footer-policy{
+justify-content: center;
+margin-bottom: 10px;
+}
+.footer-policy>li::after {
+padding: 0 10px;
+}
+
+.footer-policy>li:last-child::after {
+content:none;
+}
+
+.footer-policy>li>a {
+font-size: 13px;
+font-weight: 400;
+}
+
+/* 이메일, 운영시간 등 css */
+.footer-links{
+font-size: 13px;
+}
+
+.footer-links li:nth-child(1){
+float: none;
+margin-right: 0;
+}
+
+/* 하단 멘트css */
+
+.footer-bottom>p{
+margin: 0;
+font-size: 12px;
+}
+
+/* 오른쪽 sns */
+.footer-sns{
+padding: 7px 0 0;
+}
+.footer-sns>a>i{
+font-size: 20px;
+margin-right: 12px;
+}
+.footer-sns>a:last-child>i{
+margin-right: 0;
+}
+}
+
+
+@media all and (min-width:300px) and (max-width:499px) { 
+
+.footer-inner{
+padding: 10px 0 20px;
+width: 100%;
+text-align: center;
+}
+/* 왼/오 박스 */
+.footer-left{
+float: none;
+}
+.footer-right{
+float: none;
+text-align: center;
+padding-top: 10px;
+}
+
+.footer-logo>img{
+width: 65px;
+}
+/* 정책 css */
+.footer-policy{
+justify-content: center;
+margin-bottom: 10px;
+}
+.footer-policy>li::after {
+padding: 0 5px;
+}
+
+.footer-policy>li:last-child::after {
+content:none;
+}
+
+.footer-policy>li>a {
+font-size: 11px;
+font-weight: 400;
+}
+
+/* 이메일, 운영시간 등 css */
+.footer-links{
+font-size: 10px;
+}
+
+.footer-links li:nth-child(1){
+float: none;
+margin-right: 0;
+}
+
+/* 하단 멘트css */
+
+.footer-bottom>p{
+margin: 0;
+font-size: 10px;
+}
+
+/* 오른쪽 sns */
+.footer-sns{
+padding: 7px 0 0;
+}
+.footer-sns>a>i{
+font-size: 18px;
+margin-right: 12px;
+}
+.footer-sns>a:last-child>i{
+margin-right: 0;
+}
+}
