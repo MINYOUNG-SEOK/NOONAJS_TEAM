@@ -1,32 +1,27 @@
+main.container-fluid {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
 .home-banner {
     position: relative;
-    max-width: 90%;
-    height: 550px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 50px;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
-    border-radius: 12px;
     overflow: hidden;
 }
 
 .home-banner__image {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: auto;
 }
 
 .home-banner__image img {
+    display: block;
     width: 100%;
     height: auto;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .home-fade-in {
@@ -310,7 +305,7 @@
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: #666;
+    background-color: #333;
     transition: width 0.3s ease;
 }
 
@@ -377,12 +372,11 @@
 
 .home-banner-indicators {
     position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    gap: 8px;
     z-index: 5;
 }
 
@@ -406,7 +400,28 @@
 
 @media (max-width: 1024px) {
     .home-banner {
-        margin-top: -50px;
+        height: auto !important;
+        padding: 0 !important;
+    }
+
+    .home-banner__image {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .home-banner__image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        display: block;
+    }
+
+    .home-banner-indicators {
+        position: absolute;
+        bottom: 20px;
+        z-index: 10;
     }
 
     .home-bestseller-section {
@@ -438,6 +453,13 @@
 }
 
 @media (max-width: 768px) {
+    .home-banner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     .home-section-header>.col-12>.d-flex {
         flex-direction: column;
         align-items: flex-start;

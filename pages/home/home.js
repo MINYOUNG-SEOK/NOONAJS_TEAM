@@ -88,9 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
     slider.innerHTML = "";
   }
 
-  // 메인 배너 이미지 순환
   function initBannerRotation() {
-    const images = [
+    // 데스크톱용 이미지
+    const desktopImages = [
       "./images/banner1.png",
       "./images/banner2.png",
       "./images/banner3.png",
@@ -102,6 +102,21 @@ document.addEventListener("DOMContentLoaded", function () {
       "./images/banner9.png",
       "./images/banner10.png",
     ];
+
+    // 모바일용 이미지 (1024px 이하)
+    const mobileImages = [
+      "./images/1banner.png",
+      "./images/2banner.png",
+      "./images/3banner.png",
+      "./images/4banner.png",
+      "./images/5banner.png",
+      "./images/6banner.png",
+      "./images/7banner.png",
+      "./images/8banner.jpg",
+      "./images/9banner.png",
+      "./images/10banner.png",
+    ];
+
     let currentIndex = 0;
     const imageElement = document.getElementById("bannerImage");
     const indicatorsContainer = document.getElementById("bannerIndicators");
@@ -109,8 +124,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!imageElement || !indicatorsContainer) return;
 
+    // 현재 화면 크기에 맞는 이미지 배열 선택 (1024px 기준)
+    function getCurrentImages() {
+      return window.innerWidth <= 1024 ? mobileImages : desktopImages;
+    }
+
     // 인디케이터 생성
-    images.forEach((_, index) => {
+    desktopImages.forEach((_, index) => {
       const indicator = document.createElement("div");
       indicator.className = `home-banner-indicator ${
         index === 0 ? "active" : ""
@@ -138,17 +158,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // 이미지 업데이트
+      // 이미지 업데이트 - 현재 화면 크기에 맞는 이미지 사용
       imageElement.classList.remove("home-fade-in");
       setTimeout(() => {
-        imageElement.src = images[currentIndex];
+        imageElement.src = getCurrentImages()[currentIndex];
         imageElement.classList.add("home-fade-in");
       }, 300);
     }
 
     // 자동 슬라이드
     function changeImage() {
-      currentIndex = (currentIndex + 1) % images.length;
+      currentIndex = (currentIndex + 1) % desktopImages.length;
       updateBanner();
     }
 
@@ -163,6 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 초기 타이머 설정
     resetAutoSlide();
 
+    // 화면 크기 변경 감지하여 이미지 업데이트
+    window.addEventListener("resize", updateBanner);
+
     // 배너에 마우스 오버시 자동 슬라이드 일시 정지
     const bannerSection = document.querySelector(".home-banner");
     if (bannerSection) {
@@ -175,6 +198,9 @@ document.addEventListener("DOMContentLoaded", function () {
         resetAutoSlide();
       });
     }
+
+    // 초기 이미지 로드
+    updateBanner();
   }
 
   // 베스트셀러 (상단 큰 영역) 데이터 로드
