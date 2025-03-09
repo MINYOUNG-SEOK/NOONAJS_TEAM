@@ -500,4 +500,17 @@ main.container-fluid {
     .home-page-info {
         display: none;
     }
+
+    .home-bestseller-section {
+        width: 100%;
+    }
+
+    .home-new-release-books {
+        width: 100%;
+    }
+
+    .home-category-bestseller {
+        width: 100%;
+
+    }
 }
