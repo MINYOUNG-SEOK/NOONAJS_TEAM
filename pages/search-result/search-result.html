@@ -6,6 +6,7 @@
     <title>검색 결과</title>
     <!-- 스타일 -->
     <link rel="stylesheet" href="search-result.css" />
+    <link rel="stylesheet" href="/pages/category/category.css" />
     <script src="/main.js"></script>
     <script
       src="https://kit.fontawesome.com/d41c0ade58.js"
@@ -36,7 +37,11 @@
     <main>
       <!-- 검색어의 베스트 도서 -->
       <div class="header_top-rated-container">
-        <div class="search_best_title">📚 검색어의 베스트 도서</div>
+        <div class="title-container">
+          <button type="button" class="slick-prev">&lt;</button>
+          <div class="search_best_title">📚 검색어의 베스트 도서</div>
+          <button type="button" class="slick-next">&gt;</button>
+        </div>
         <div
           class="header_top-rated-slider multiple-items"
           id="header_top-rated-slider"
@@ -112,7 +117,7 @@
       </section>
 
       <!-- 검색 결과 -->
-      <div class="search-result" id="search-results"></div>
+      <div class="search-result" id="book-list"></div>
 
       <!-- 페이지네이션 -->
       <div class="search-result_page">

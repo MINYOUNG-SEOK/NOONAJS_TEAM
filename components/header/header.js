@@ -11,7 +11,15 @@ document.addEventListener("headerLoaded", function () {
   }
 
   function openSearch() {
-    console.log("검색창 열기"); //디버깅용 콘솔
+    console.log("검색창 열기"); // 디버깅용 콘솔
+
+    // 사이드바가 열려있으면 닫기
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar.classList.contains("open")) {
+      sidebar.classList.remove("open");
+      console.log("사이드바 닫음");
+    }
+
     searchBox.style.display = "flex";
     setTimeout(() => {
       searchBox.classList.add("active");
@@ -50,22 +58,22 @@ async function getEditorSuggestedBook() {
   try {
     const searchParams = new URLSearchParams();
     searchParams.set("apiType", "ItemList");
-    searchParams.set("QueryType", "BlogBest"); // ✅ 편집자 추천 API
+    searchParams.set("QueryType", "BlogBest"); // 편집자 추천 API
     searchParams.set("MaxResults", "5");
     searchParams.set("start", "1");
     searchParams.set("SearchTarget", "Book");
-    searchParams.set("CategoryId", "0"); // ✅ 카테고리 필수 (0 = 전체)
+    searchParams.set("CategoryId", "0"); // 카테고리 필수 (0 = 전체)
 
     const url = `/.netlify/functions/api-proxy?${searchParams.toString()}`;
-    console.log("📌 API 요청 URL:", url);
+    console.log("API 요청 URL:", url);
 
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log("📌 API 응답 데이터:", data);
+    console.log("API 응답 데이터:", data);
 
     if (!data.item || data.item.length === 0) {
-      console.warn("⚠️ 편집자 추천 도서를 찾을 수 없습니다.");
+      console.warn("편집자 추천 도서를 찾을 수 없습니다.");
       document.getElementById("header_suggestedBook_title").innerHTML =
         "<p>편집자 추천 도서를 찾을 수 없습니다.</p>";
       return;
@@ -73,7 +81,7 @@ async function getEditorSuggestedBook() {
 
     renderEditorChoiceResults(data.item);
   } catch (error) {
-    console.error("❌ API 요청 실패:", error);
+    console.error("API 요청 실패:", error);
   }
 }
 
@@ -102,13 +110,38 @@ window.onload = function () {
   getEditorSuggestedBook();
 };
 
-// 사이드메뉴 열고 닫기
+// 사이드바 열고 닫기
 const toggleMenu = () => {
   const sidebar = document.getElementById("sidebar");
-  sidebar.classList.toggle(
-    "open"
-  ); /* class.toggle은 클래스가 없으면 추가를 있으면 제거를 하는 방식 */
+  const searchBox = document.getElementById("header_searchBox");
+
+  // 검색창이 열려 있다면 닫아줌 (사이드바와 충돌 방지)
+  if (searchBox.classList.contains("active")) {
+    closeSearch();
+    console.log("검색창 닫음");
+  }
+
+  // 사이드바 상태 변경
+  sidebar.classList.toggle("open");
+
+  // 디버깅용 콘솔 출력
+  console.log(
+    "사이드바 상태:",
+    sidebar.classList.contains("open") ? "열림" : "닫힘"
+  );
 };
+
+// 사이드 아이콘 이벤트 리스너 추가
+document.addEventListener("DOMContentLoaded", () => {
+  const sideIcon = document.querySelector(".side-icon");
+  if (sideIcon) {
+    sideIcon.addEventListener("click", toggleMenu);
+  }
+});
+
+// 추가: 이벤트 리스너 중복 방지 확인
+document.querySelector(".side-icon").removeEventListener("click", toggleMenu);
+document.querySelector(".side-icon").addEventListener("click", toggleMenu);
 
 window.addEventListener("resize", () => {
   const sidebar = document.getElementById("sidebar");
@@ -129,3 +162,11 @@ document.addEventListener("click", (event) => {
     sidebar.classList.remove("open");
   }
 });
+
+//카테고리 페이지로 이동
+function navigateToCategory(category) {
+  const categoryURL = `/pages/category/category.html?category=${encodeURIComponent(
+    category
+  )}`;
+  window.location.href = categoryURL;
+}
