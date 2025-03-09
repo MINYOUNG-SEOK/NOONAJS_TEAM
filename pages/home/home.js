@@ -390,6 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const bookItem = document.createElement("div");
       bookItem.className = "home-bestseller-slider__item";
       bookItem.setAttribute("data-index", index);
+      bookItem.setAttribute("data-item-id", book.itemId); // 각 슬라이드에 itemId 추가
       bookItem.addEventListener("click", () => {
         window.location.href = `../book-detail/detail.html?itemId=${book.itemId}`;
       });
@@ -420,9 +421,20 @@ document.addEventListener("DOMContentLoaded", function () {
       if (featuredDescription)
         featuredDescription.textContent =
           featuredBook.description || "내용 없음";
+
+      // 대표책 컨테이너에 클릭 이벤트 추가
+      const featuredBookContainer = document.querySelector(
+        ".home-featured-book-container"
+      );
+      if (featuredBookContainer) {
+        featuredBookContainer.style.cursor = "pointer";
+        featuredBookContainer.setAttribute("data-item-id", featuredBook.itemId);
+        featuredBookContainer.addEventListener("click", () => {
+          window.location.href = `../book-detail/detail.html?itemId=${featuredBook.itemId}`;
+        });
+      }
     }
   }
-
   function displayNewReleaseBooks(books) {
     const slider = document.getElementById("newReleaseSlider");
     if (!slider) return;
@@ -524,6 +536,26 @@ document.addEventListener("DOMContentLoaded", function () {
       featuredElements.featuredDescription
     );
 
+    // 대표책 컨테이너 참조 추가
+    const featuredBookContainer = document.querySelector(
+      ".home-featured-book-container"
+    );
+
+    // 대표책에 직접 클릭 이벤트 리스너 추가 (이벤트 위임 사용)
+    if (featuredBookContainer) {
+      featuredBookContainer.style.cursor = "pointer";
+      featuredBookContainer.addEventListener("click", () => {
+        // 현재 선택된 슬라이드의 itemId 가져오기
+        const currentSlide = sliderItems[currentSlideIndex];
+        if (currentSlide) {
+          const itemId = currentSlide.getAttribute("data-item-id");
+          if (itemId) {
+            window.location.href = `../book-detail/detail.html?itemId=${itemId}`;
+          }
+        }
+      });
+    }
+
     // 진행 바
     const progressBar = document.querySelector(
       ".home-slider-controls-special #bestsellerProgressBar"
@@ -604,6 +636,15 @@ document.addEventListener("DOMContentLoaded", function () {
         featuredAuthor.textContent = bookData.author + " | 역자";
         featuredDescription.textContent = bookData.description;
         featuredImage.classList.add("home-fade-in");
+
+        // data-item-id 업데이트는 유지하되, 클릭 이벤트는 다시 설정하지 않음
+        const currentSlide = sliderItems[currentSlideIndex];
+        if (currentSlide) {
+          const itemId = currentSlide.getAttribute("data-item-id");
+          if (featuredBookContainer && itemId) {
+            featuredBookContainer.setAttribute("data-item-id", itemId);
+          }
+        }
       }, 200);
     }
 
@@ -652,12 +693,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function updatePageInfo() {
       if (!pageInfo) return;
       const current = currentSlideIndex + 1;
-      const total = maxSlideIndex + 1;
 
       pageInfo.innerHTML = `
         <span class="current-page">${current}</span>
         <span class="page-separator"> ・ </span>
-        <span class="total-page">${total}</span>`;
+        <span class="total-page">30</span>`;
     }
 
     function updateProgressBar() {
