@@ -326,3 +326,9 @@
     height: 180px;
   }
 }
+
+@media (max-width: 410) {
+  .search_best_title {
+    font-size: 0.9rem;
+  }
+}

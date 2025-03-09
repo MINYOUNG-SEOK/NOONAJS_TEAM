@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #f8f3d9 !important;
+  background-color: white !important;
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -39,7 +39,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: rgb(250, 249, 245);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px 0;
@@ -117,7 +117,7 @@
   transform: translate(-50%, -100%);
   width: 100%;
   height: 400px; /* 높이 조정 */
-  background-color: #f8f3d9;
+  background-color: white;
   display: none;
   flex-direction: column;
   justify-content: space-between; /* 요소들 사이에 공간 배분 */
@@ -149,7 +149,7 @@
 
 .header_search-box .inner {
   margin-top: 50px;
-  background: #f8f3d9;
+  background: white;
   padding: 20px;
   border-radius: 8px;
   text-align: center;
@@ -220,7 +220,7 @@
   display: inline-block;
   margin: 5px;
   padding: 5px 10px;
-  background-color: #ffcc00;
+  background-color: #f8f3d9;
   color: #333;
   border-radius: 5px;
   cursor: pointer;
@@ -230,7 +230,7 @@
 }
 
 .suggested-keyword:hover {
-  background-color: #ffae00;
+  background-color: #efe7c0;
 }
 
 /* 사이드 메뉴바 */
@@ -240,11 +240,12 @@
   position: fixed;
   top: 0;
   left: -260px;
-  background-color: #ebe5c2;
+  background-color: #f8f3d9;
   transition: left 0.3s ease-in-out;
   padding-top: 20px;
   overflow: hidden;
   z-index: 1100;
+  border-right: #bbb596 solid 0.1px;
 }
 
 .sidebar.open {
@@ -267,7 +268,7 @@
 }
 
 .sidebar-menus button:hover {
-  background-color: #f8f3d9;
+  background-color: #e7e0be;
   font-weight: bolder;
 }
 
