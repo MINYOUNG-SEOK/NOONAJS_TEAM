@@ -13,6 +13,40 @@ button {
     cursor: pointer;
 }
 
+.fav_nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.fav_category {
+    border: 0;
+    background-color: transparent;
+    margin: 10px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.fav_category.active, .fav_category:hover {
+    background-color: rgb(248, 243, 217);
+    color: #707070;
+}
+
+.fav_no-items {
+    width: 100%;
+    min-height: 300px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #767676;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .fav_container {
     padding-top: 80px;
 }
@@ -41,26 +75,24 @@ button {
     justify-content: center;
 }
 
-.fav_book-thum:hover {
-    transform: scale(1.1);
-}
-
 .fav_book-image {
     cursor: pointer;
     border: 1px solid #ddd;
     width: 170px;
-    height: auto;
+    height: 240px;
     transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    object-fit: cover;
 }
 
 .fav_book-image:hover {
-    /* transform: scale(1.1); */
+    transform: scale(1.1);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .fav_button-like {
+    z-index: 2;
     position: absolute;
-    bottom: 5px;
+    bottom: -5px;
     right: 0;
     border: 0;
     padding: 0;
@@ -70,12 +102,14 @@ button {
     border-radius: 50%;
     background-position: 50% 50%;
     background-size: 20px;
-    background-color: rgba(224,224,224,.4);
+    background-color: rgba(185, 178, 138, .4);
     color: red;
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .fav_button-like:hover {
-    
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transform: translateY(-3px);
 }
 
 .fav_blind {
@@ -93,6 +127,7 @@ button {
     justify-content: center;
     align-content: center;
     padding: 15px 20px;
+    text-align: center;
 }
 
 .fav_book-card-text .fav_book-title {
@@ -100,17 +135,54 @@ button {
     font-weight: 500;
     /* padding: 15px 20px 10px 25px; */
     color: #2d2d2d;
-    text-align: center;
 }
 
 .fav_book-card-text .fav_book-author {
     font-size: 13px;
     font-weight: 400;
     color: #767676;
-    text-align: center;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 최대 2줄 */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.fav_book-desc {
+    display: none;
 }
 
 /* 페이지네이션 */
+.fav_page-box {
+    padding: 80px 0;
+}
+
+.pagination {
+    font-size: 17px;
+    color: #767676;
+    display: flex;
+    justify-content: center;
+}
+
+.page-link{
+    border: none;
+    color: #999;
+    cursor: pointer;
+  }
+  
+  .page-link:hover{
+    background-color: #fff;
+    border-color: #F8F3D9;
+    color: #141414;
+  }
+  
+  .active>.page-link, .page-link.active {
+    background-color: rgba(185, 178, 138, .5);
+    border-color: rgba(185, 178, 138, .5);
+  }
 
 
 /* 팝업 알람창 */
@@ -170,4 +242,87 @@ button {
     cursor: pointer;
 }
 
+@media (max-width: 1023px) {
+    .fav_contents {
+        justify-content: center;
+    }
+}
 
+
+@media screen and (max-width: 700px) and (min-width: 400px) {
+    .fav_contents {
+        justify-content: center;
+    }
+
+    .fav_book-card {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 90%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 25px;
+        overflow: hidden;
+        margin: 10px auto;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .fav_book-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .fav_book-thum {
+        position: static;
+        width: 40%;
+        margin: 0;
+    }
+
+    .fav_book-image {
+        width: 100%;
+        transition: none;
+        border-radius: 25px 0 0 25px;
+        object-fit: cover;
+    }
+
+    .fav_book-image:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .fav_button-like {
+        /* left: 0; */
+        top: 10px;
+        right: 10px;
+    }
+
+    .fav_book-card-text {
+        justify-content: center;
+        text-align: left;
+        width: 60%;
+    }
+
+    .fav_book-desc {
+        display: block;
+        font-size: 13px;
+        font-weight: 400;
+        color: #333;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* 최대 3줄 */
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+    }
+
+    .fav_page-box {
+        padding-top: 50px;
+    }
+}
+
+@media screen and (max-width: 399px) {
+    .fav_contents {
+        justify-content: center;
+    }
+}
