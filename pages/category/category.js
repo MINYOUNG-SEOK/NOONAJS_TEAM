@@ -101,7 +101,7 @@ const render = () => {
     // .filter(book => book.cover !== "https://image.aladin.co.kr/img/noimg_b.gif") //이미지 없으면 표시안하기
     .map(
       (book) => `
-        <div class="book-card">
+        <div class="book-card" onclick="goToBookDetail(${book.itemId})">
             <img src="${book.cover}" alt="${book.title}">
             <h3 class="categories-title">${book.title}</h3>
             <p class="categories-author">${book.author}</p>
@@ -111,6 +111,11 @@ const render = () => {
     .join("");
 
   document.getElementById("book-list").innerHTML = booksHTML;
+};
+
+// 클릭 시 해당 책 상세 페이지로 이동하는 함수 추가
+const goToBookDetail = (itemId) => {
+  window.location.href = `../book-detail/detail.html?itemId=${itemId}`;
 };
 
 const paginationRender = () => {
